@@ -44,7 +44,6 @@ dependencies {
     implementation deps.gson
 
     implementation deps.retrofit.core
-    implementation deps.retrofit.scalars
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava
 
