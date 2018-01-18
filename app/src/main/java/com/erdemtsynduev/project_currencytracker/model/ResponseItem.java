@@ -3,7 +3,7 @@ package com.erdemtsynduev.project_currencytracker.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseTicker {
+public class ResponseItem {
 
     @SerializedName("id")
     @Expose
