@@ -1,5 +1,5 @@
-# Project currency tracker
-===================================
+Project currency tracker
+=========================
 
 Android application tracker cryptocurrency. 
 
