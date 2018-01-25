@@ -1,5 +1,6 @@
 # Project currency tracker
 ===================================
+
 Android application tracker cryptocurrency. 
 
 Samples demonstrating how to use:
