@@ -1,4 +1,4 @@
-package com.erdemtsynduev.project_currencytracker.model;
+package com.erdemtsynduev.project_currencytracker.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
