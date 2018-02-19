@@ -19,6 +19,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -39,6 +40,7 @@ dependencies {
     implementation deps.support.design
     implementation deps.support.cardview
     implementation deps.support.recyclerView
+    implementation deps.guavaAndroid
 
     implementation deps.timber
     implementation deps.gson
@@ -50,10 +52,9 @@ dependencies {
     implementation deps.rx.core
     implementation deps.rx.android
 
-    implementation deps.dagger.coreAndroid
-    annotationProcessor deps.dagger.compiler
-
     testImplementation deps.junit
     androidTestImplementation deps.testRunner
-    androidTestImplementation deps.espresso.core
+    androidTestImplementation(deps.espresso.core) {
+        exclude group: 'com.google.code.findbugs'
+    }
 }

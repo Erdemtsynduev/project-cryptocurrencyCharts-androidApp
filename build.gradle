@@ -2,11 +2,11 @@ buildscript {
 
     ext.versions = [
             'compileSdk'    : 27,
-            'minSdk'        : 16,
+            'minSdk'        : 19,
             'targetSdk'     : 27,
 
             'supportLibrary': '27.0.2',
-            'okhttp'        : '3.8.1',
+            'okhttp'        : '3.9.1',
             'retrofit'      : '2.3.0',
             'leakCanary'    : '1.5.1',
             'espresso'      : '3.0.1',
@@ -27,16 +27,16 @@ buildscript {
                     'logger': "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
             ],
             'retrofit'       : [
-                    'core'   : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-                    'gson'   : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
-                    'rxjava' : "com.squareup.retrofit2:adapter-rxjava:${versions.retrofit}",
+                    'core'  : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    'gson'  : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    'rxjava': "com.squareup.retrofit2:adapter-rxjava:${versions.retrofit}",
             ],
             'timber'         : 'com.jakewharton.timber:timber:4.5.1',
             'gson'           : 'com.google.code.gson:gson:2.8.1',
             'javaxAnnotation': 'org.glassfish:javax.annotation:10.0-b28',
             'rx'             : [
-                    'core'       : 'io.reactivex.rxjava2:rxjava:2.1.1',
-                    'android'    : 'io.reactivex.rxjava2:rxandroid:2.0.1',
+                    'core'   : 'io.reactivex.rxjava2:rxjava:2.1.1',
+                    'android': 'io.reactivex.rxjava2:rxandroid:2.0.1',
             ],
             'junit'          : 'junit:junit:4.12',
             'testRunner'     : 'com.android.support.test:runner:1.0.1',
@@ -44,12 +44,7 @@ buildscript {
                     'core'   : "com.android.support.test.espresso:espresso-core:${versions.espresso}",
                     'contrib': "com.android.support.test.espresso:espresso-contrib:${versions.espresso}",
             ],
-            'dagger'         : [
-                    'coreAndroid'       : "com.google.dagger:dagger-android:${versions.dagger2}",
-                    'coreAndroidSupport': "com.google.dagger:dagger-android-support:${versions.dagger2}",
-                    'androidProcessor'  : "com.google.dagger:dagger-android-processor:${versions.dagger2}",
-                    'compiler'          : "com.google.dagger:dagger-compiler:${versions.dagger2}",
-            ],
+            'guavaAndroid'   : 'com.google.guava:guava:24.0-android',
     ]
 
     repositories {
