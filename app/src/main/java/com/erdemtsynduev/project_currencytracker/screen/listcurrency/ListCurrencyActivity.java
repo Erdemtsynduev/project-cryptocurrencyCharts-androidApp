@@ -4,24 +4,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.erdemtsynduev.project_currencytracker.R;
-import com.erdemtsynduev.project_currencytracker.model.ResponseItem;
-
-import java.util.List;
+import com.erdemtsynduev.project_currencytracker.utils.ActivityUtils;
 
 public class ListCurrencyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_currency);
-        doRequest();
-    }
+        setContentView(R.layout.activity_listcurrency);
 
-    private void doRequest(){
+        ListCurrencyFragment listCurrencyFragment = (ListCurrencyFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.contentFrame);
 
-    }
+        if (listCurrencyFragment == null) {
+            listCurrencyFragment = ListCurrencyFragment.newInstance();
 
-    private void arrayListInit(List<ResponseItem> responseItemList){
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    listCurrencyFragment, R.id.contentFrame);
+        }
 
+        new ListCurrencyPresenter(listCurrencyFragment);
     }
 }
