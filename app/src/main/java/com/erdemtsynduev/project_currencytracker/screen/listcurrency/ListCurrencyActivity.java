@@ -1,4 +1,4 @@
-package com.erdemtsynduev.project_currencytracker.listcurrency;
+package com.erdemtsynduev.project_currencytracker.screen.listcurrency;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
