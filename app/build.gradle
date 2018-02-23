@@ -41,6 +41,8 @@ dependencies {
     implementation deps.support.cardview
     implementation deps.support.recyclerView
     implementation deps.guavaAndroid
+    implementation deps.butterknife.core
+    annotationProcessor deps.butterknife.compiler
 
     implementation deps.timber
     implementation deps.gson

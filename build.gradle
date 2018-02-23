@@ -8,9 +8,10 @@ buildscript {
             'supportLibrary': '27.0.2',
             'okhttp'        : '3.9.1',
             'retrofit'      : '2.3.0',
-            'leakCanary'    : '1.5.1',
+            'leakCanary'    : '1.5.4',
             'espresso'      : '3.0.1',
             'dagger2'       : '2.11',
+            'butterknife'   : '8.8.1',
     ]
 
     ext.deps = [
@@ -43,6 +44,10 @@ buildscript {
             'espresso'       : [
                     'core'   : "com.android.support.test.espresso:espresso-core:${versions.espresso}",
                     'contrib': "com.android.support.test.espresso:espresso-contrib:${versions.espresso}",
+            ],
+            'butterknife'    : [
+                    'core'    : "com.jakewharton:butterknife:${versions.butterknife}",
+                    'compiler': "com.jakewharton:butterknife-compiler:${versions.butterknife}",
             ],
             'guavaAndroid'   : 'com.google.guava:guava:24.0-android',
     ]
