@@ -1,6 +1,5 @@
 package com.erdemtsynduev.project_currencytracker.network;
 
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;

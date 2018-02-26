@@ -1,8 +1,7 @@
-// Manifest version information!
 def versionMajor = 1
 def versionMinor = 0
 def versionPatch = 0
-def versionBuild = 0 // bump for dogfood builds, public betas, etc.
+def versionBuild = 0
 
 apply plugin: 'com.android.application'
 
@@ -21,8 +20,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled true
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             javaCompileOptions.annotationProcessorOptions.arguments['butterknife.debuggable'] = 'false'
         }
