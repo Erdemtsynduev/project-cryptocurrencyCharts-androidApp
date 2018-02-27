@@ -6,16 +6,16 @@ buildscript {
             'targetSdk'     : 27,
 
             'supportLibrary': '27.0.2',
-            'okhttp'        : '3.9.1',
+            'okhttp'        : '3.10.0',
             'retrofit'      : '2.3.0',
             'leakCanary'    : '1.5.4',
             'espresso'      : '3.0.1',
-            'dagger2'       : '2.11',
+            'dagger2'       : '2.14.1',
             'butterknife'   : '8.8.1',
     ]
 
     ext.deps = [
-            'support'        : [
+            'support'     : [
                     'annotations'     : "com.android.support:support-annotations:${versions.supportLibrary}",
                     'appCompat'       : "com.android.support:appcompat-v7:${versions.supportLibrary}",
                     'design'          : "com.android.support:design:${versions.supportLibrary}",
@@ -23,39 +23,39 @@ buildscript {
                     'recyclerView'    : "com.android.support:recyclerview-v7:${versions.supportLibrary}",
                     'constraintLayout': 'com.android.support.constraint:constraint-layout:1.0.2',
             ],
-            'okhttp'         : [
+            'okhttp'      : [
                     'core'  : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
                     'logger': "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
             ],
-            'retrofit'       : [
+            'retrofit'    : [
                     'core'  : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
                     'gson'  : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
                     'rxjava': "com.squareup.retrofit2:adapter-rxjava:${versions.retrofit}",
             ],
-            'timber'         : 'com.jakewharton.timber:timber:4.5.1',
-            'gson'           : 'com.google.code.gson:gson:2.8.1',
-            'javaxAnnotation': 'org.glassfish:javax.annotation:10.0-b28',
-            'rx'             : [
-                    'core'   : 'io.reactivex.rxjava2:rxjava:2.1.1',
-                    'android': 'io.reactivex.rxjava2:rxandroid:2.0.1',
+            'timber'      : 'com.jakewharton.timber:timber:4.6.1',
+            'gson'        : 'com.google.code.gson:gson:2.8.2',
+            'rx'          : [
+                    'core'   : 'io.reactivex.rxjava2:rxjava:2.1.10',
+                    'android': 'io.reactivex.rxjava2:rxandroid:2.0.2',
             ],
-            'junit'          : 'junit:junit:4.12',
-            'testRunner'     : 'com.android.support.test:runner:1.0.1',
-            'espresso'       : [
+            'junit'       : 'junit:junit:4.12',
+            'testRunner'  : 'com.android.support.test:runner:1.0.1',
+            'espresso'    : [
                     'core'   : "com.android.support.test.espresso:espresso-core:${versions.espresso}",
                     'contrib': "com.android.support.test.espresso:espresso-contrib:${versions.espresso}",
             ],
-            'butterknife'    : [
+            'butterknife' : [
                     'core'    : "com.jakewharton:butterknife:${versions.butterknife}",
                     'compiler': "com.jakewharton:butterknife-compiler:${versions.butterknife}",
             ],
-            'guavaAndroid'   : 'com.google.guava:guava:24.0-android',
+            'guavaAndroid': 'com.google.guava:guava:24.0-android',
     ]
 
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
     }
