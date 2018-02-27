@@ -1,11 +1,11 @@
-package com.erdemtsynduev.cryptocurrencycharts.screen.home;
+package com.erdemtsynduev.cryptocurrencycharts.screen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.erdemtsynduev.cryptocurrencycharts.R;
-import com.erdemtsynduev.cryptocurrencycharts.screen.home.currencylist.CurrencyListFragment;
-import com.erdemtsynduev.cryptocurrencycharts.screen.home.currencylist.CurrencyListPresenter;
+import com.erdemtsynduev.cryptocurrencycharts.screen.currencylist.CurrencyListFragment;
+import com.erdemtsynduev.cryptocurrencycharts.screen.currencylist.CurrencyListPresenter;
 import com.erdemtsynduev.cryptocurrencycharts.utils.ActivityUtils;
 
 public class HomeActivity extends AppCompatActivity {

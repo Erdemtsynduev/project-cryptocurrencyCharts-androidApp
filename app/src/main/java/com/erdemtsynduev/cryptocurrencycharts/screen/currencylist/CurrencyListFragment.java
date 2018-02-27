@@ -1,4 +1,4 @@
-package com.erdemtsynduev.cryptocurrencycharts.screen.home.currencylist;
+package com.erdemtsynduev.cryptocurrencycharts.screen.currencylist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

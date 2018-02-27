@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.erdemtsynduev.cryptocurrencycharts.screen.home.HomeActivity">
+        <activity android:name="com.erdemtsynduev.cryptocurrencycharts.screen.HomeActivity">
 
         </activity>
     </application>

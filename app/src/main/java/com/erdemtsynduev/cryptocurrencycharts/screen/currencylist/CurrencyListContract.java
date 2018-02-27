@@ -1,11 +1,11 @@
-package com.erdemtsynduev.cryptocurrencycharts.screen.home.settings;
+package com.erdemtsynduev.cryptocurrencycharts.screen.currencylist;
 
 import com.erdemtsynduev.cryptocurrencycharts.BasePresenter;
 import com.erdemtsynduev.cryptocurrencycharts.BaseView;
 
-public interface SettingsContract {
+public interface CurrencyListContract {
 
-    interface View extends BaseView<SettingsContract.Presenter> {
+    interface View extends BaseView<Presenter> {
 
 
     }
@@ -14,5 +14,4 @@ public interface SettingsContract {
 
 
     }
-
 }

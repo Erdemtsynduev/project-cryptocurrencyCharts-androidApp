@@ -1,4 +1,4 @@
-package com.erdemtsynduev.cryptocurrencycharts.screen.home.settings;
+package com.erdemtsynduev.cryptocurrencycharts.screen.portfolio;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,12 +12,12 @@ import com.erdemtsynduev.cryptocurrencycharts.R;
 
 import static com.erdemtsynduev.cryptocurrencycharts.utils.Utils.checkNotNull;
 
-public class SettingsFragment extends Fragment implements SettingsContract.View {
+public class PortfolioFragment extends Fragment implements PortfolioContract.View {
 
-    private SettingsContract.Presenter mPresenter;
+    private PortfolioContract.Presenter mPresenter;
 
-    public static SettingsFragment newInstance() {
-        return new SettingsFragment();
+    public static PortfolioFragment newInstance() {
+        return new PortfolioFragment();
     }
 
     @Override
@@ -35,14 +35,14 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_portfolio, container, false);
 
         return view;
     }
 
 
     @Override
-    public void setPresenter(@NonNull SettingsContract.Presenter presenter) {
+    public void setPresenter(@NonNull PortfolioContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
     }
 }
