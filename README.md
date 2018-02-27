@@ -1,7 +1,7 @@
-Project currency tracker
+Project - "Cryptocurrency Rates"
 =========================
 
-Android application tracker cryptocurrency. 
+Android application allows you to follow the course of the crypto currency
 
 Samples demonstrating how to use:
 1. How to Get Queries with Retrofit
@@ -12,7 +12,7 @@ Samples demonstrating how to use:
 Pre-requisites
 --------------
 Android SDK 27
-Android Build Tools v27.0.1
+Android Build Tools v27.0.2
 Android Support Repository
 
 Getting Started
