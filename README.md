@@ -1,4 +1,4 @@
-Project - "Cryptocurrency Rates"
+Project - "Cryptocurrency Charts"
 =========================
 
 Android application allows you to follow the course of the crypto currency
