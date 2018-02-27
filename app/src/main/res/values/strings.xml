@@ -1,10 +1,15 @@
 <resources>
-    <string name="app_name">project_currencyTracker</string>
-    <string name="item_listcurrency_title_7d">7d:</string>
-    <string name="item_listcurrency_tittle_24h">24h:</string>
-    <string name="item_listcurrency_name">TextView</string>
-    <string name="item_listcurrency_money">TextView</string>
-    <string name="item_listcurrency_devider">|</string>
-    <string name="item_listcurrency_symbol">TextView</string>
-    <string name="item_listcurrency_image_symbol_content">Image symbol cryptocurrency</string>
+    <string name="app_name">Cryptocurrency Rates</string>
+
+    <string name="item_currency_title_7d">7d:</string>
+    <string name="item_currency_tittle_24h">24h:</string>
+    <string name="item_currency_name">TextView</string>
+    <string name="item_currency_money">TextView</string>
+    <string name="item_currency_devider">|</string>
+    <string name="item_currency_symbol">TextView</string>
+    <string name="item_currency_image_symbol_content">Image symbol cryptocurrency</string>
+
+    <string name="text_menu_portfolio">Portfolio</string>
+    <string name="text_menu_list_currency">Exchange</string>
+    <string name="text_menu_setting">Setting</string>
 </resources>
