@@ -10,11 +10,16 @@ import android.view.ViewGroup;
 
 import com.erdemtsynduev.cryptocurrencycharts.R;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 import static com.erdemtsynduev.cryptocurrencycharts.utils.Utils.checkNotNull;
 
 public class CurrencyListFragment extends Fragment implements CurrencyListContract.View {
 
     private CurrencyListContract.Presenter mPresenter;
+
+    private Unbinder unbinder;
 
     public static CurrencyListFragment newInstance() {
         return new CurrencyListFragment();
@@ -36,7 +41,7 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_currencylist, container, false);
-
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -44,5 +49,11 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
     @Override
     public void setPresenter(@NonNull CurrencyListContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

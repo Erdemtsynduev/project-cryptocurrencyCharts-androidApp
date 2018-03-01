@@ -10,11 +10,16 @@ import android.view.ViewGroup;
 
 import com.erdemtsynduev.cryptocurrencycharts.R;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 import static com.erdemtsynduev.cryptocurrencycharts.utils.Utils.checkNotNull;
 
 public class PortfolioFragment extends Fragment implements PortfolioContract.View {
 
     private PortfolioContract.Presenter mPresenter;
+
+    private Unbinder unbinder;
 
     public static PortfolioFragment newInstance() {
         return new PortfolioFragment();
@@ -36,7 +41,7 @@ public class PortfolioFragment extends Fragment implements PortfolioContract.Vie
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_portfolio, container, false);
-
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -44,5 +49,11 @@ public class PortfolioFragment extends Fragment implements PortfolioContract.Vie
     @Override
     public void setPresenter(@NonNull PortfolioContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
