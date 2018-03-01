@@ -12,4 +12,8 @@
     <string name="text_menu_portfolio">Portfolio</string>
     <string name="text_menu_list_currency">Exchange</string>
     <string name="text_menu_setting">Setting</string>
+
+    <string name="text_setting_image_symbol_content">Image symbol cryptocurrency</string>
+    <string name="text_setting_about_program">About program</string>
+    <string name="text_setting_exit">Exit</string>
 </resources>
