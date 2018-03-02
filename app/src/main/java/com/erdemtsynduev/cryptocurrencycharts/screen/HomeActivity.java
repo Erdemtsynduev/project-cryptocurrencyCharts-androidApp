@@ -32,54 +32,42 @@ public class HomeActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.menu_portfolio:
                             openPortfolioFragment();
+                            return true;
                         case R.id.menu_list_currency:
                             openCurrencyListFragment();
+                            return true;
                         case R.id.menu_setting:
                             openSettingsFragment();
+                            return true;
                     }
                     return true;
                 });
     }
 
+    private void openPortfolioFragment() {
+        PortfolioFragment portfolioFragment = PortfolioFragment.newInstance();
+
+        ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(),
+                portfolioFragment, R.id.contentFrame);
+
+        new PortfolioPresenter(portfolioFragment);
+    }
+
     private void openCurrencyListFragment() {
-        CurrencyListFragment currencyListFragment = (CurrencyListFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.contentFrame);
+        CurrencyListFragment currencyListFragment = CurrencyListFragment.newInstance();
 
-        if (currencyListFragment == null) {
-            currencyListFragment = CurrencyListFragment.newInstance();
-
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    currencyListFragment, R.id.contentFrame);
-        }
+        ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(),
+                currencyListFragment, R.id.contentFrame);
 
         new CurrencyListPresenter(currencyListFragment);
     }
 
     private void openSettingsFragment() {
-        SettingsFragment settingsFragment = (SettingsFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.contentFrame);
+        SettingsFragment settingsFragment = SettingsFragment.newInstance();
 
-        if (settingsFragment == null) {
-            settingsFragment = SettingsFragment.newInstance();
-
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    settingsFragment, R.id.contentFrame);
-        }
+        ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(),
+                settingsFragment, R.id.contentFrame);
 
         new SettingsPresenter(settingsFragment);
-    }
-
-    private void openPortfolioFragment() {
-        PortfolioFragment portfolioFragment = (PortfolioFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.contentFrame);
-
-        if (portfolioFragment == null) {
-            portfolioFragment = PortfolioFragment.newInstance();
-
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    portfolioFragment, R.id.contentFrame);
-        }
-
-        new PortfolioPresenter(portfolioFragment);
     }
 }
