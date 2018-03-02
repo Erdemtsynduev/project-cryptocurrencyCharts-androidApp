@@ -48,7 +48,6 @@ buildscript {
                     'core'    : "com.jakewharton:butterknife:${versions.butterknife}",
                     'compiler': "com.jakewharton:butterknife-compiler:${versions.butterknife}",
             ],
-            'guavaAndroid': 'com.google.guava:guava:24.0-android',
     ]
 
     repositories {
