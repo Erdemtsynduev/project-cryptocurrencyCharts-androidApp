@@ -1,17 +1,17 @@
-package com.erdemtsynduev.cryptocurrencycharts.screen;
+package com.erdemtsynduev.profitcoin.screen.home;
 
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.erdemtsynduev.cryptocurrencycharts.R;
-import com.erdemtsynduev.cryptocurrencycharts.screen.currencylist.CurrencyListFragment;
-import com.erdemtsynduev.cryptocurrencycharts.screen.currencylist.CurrencyListPresenter;
-import com.erdemtsynduev.cryptocurrencycharts.screen.portfolio.PortfolioFragment;
-import com.erdemtsynduev.cryptocurrencycharts.screen.portfolio.PortfolioPresenter;
-import com.erdemtsynduev.cryptocurrencycharts.screen.settings.SettingsFragment;
-import com.erdemtsynduev.cryptocurrencycharts.screen.settings.SettingsPresenter;
-import com.erdemtsynduev.cryptocurrencycharts.utils.ActivityUtils;
+import com.erdemtsynduev.profitcoin.R;
+import com.erdemtsynduev.profitcoin.screen.currencylist.CurrencyListFragment;
+import com.erdemtsynduev.profitcoin.screen.currencylist.CurrencyListPresenter;
+import com.erdemtsynduev.profitcoin.screen.portfolio.PortfolioFragment;
+import com.erdemtsynduev.profitcoin.screen.portfolio.PortfolioPresenter;
+import com.erdemtsynduev.profitcoin.screen.settings.SettingsFragment;
+import com.erdemtsynduev.profitcoin.screen.settings.SettingsPresenter;
+import com.erdemtsynduev.profitcoin.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
