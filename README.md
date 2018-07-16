@@ -1,13 +1,11 @@
-Project - "Cryptocurrency Charts"
+Project - "Profitcoin"
 =========================
 
-Android application allows you to follow the course of the crypto currency
+PROFITCON is a Navigator in the cryptocurrency world. The application will help you to track changes in the value of cryptocurrencies, make a portfolio with your coins.
 
-Samples demonstrating how to use:
-1. How to Get Queries with Retrofit
-2. Retrofit and Rx
-3. RecyclerView
-4. Retrieving data from api
+In the app you can find all the popular cryptocurrencies including Bitcoin (Bitcoin), Ethereum, Ripple, Litecoin, IOTA, Cardano, Stellar and many others.
+
+Data on the current value of cryptocurrencies are collected automatically, based on the CoinMarketCap service rates. The application displays the current rate and the corresponding balance of the user's assets.
 
 Pre-requisites
 --------------
