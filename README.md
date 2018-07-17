@@ -7,6 +7,19 @@ In the app you can find all the popular cryptocurrencies including Bitcoin (Bitc
 
 Data on the current value of cryptocurrencies are collected automatically, based on the CoinMarketCap service rates. The application displays the current rate and the corresponding balance of the user's assets.
 
+Features
+--------------
+
+⦁	Make your portfolio of your favorite coins
+
+⦁	Follow all popular cryptocurrencies
+
+⦁	View, sort, and filter the price change on the Catalog screen
+
+⦁	View a detailed description of the coins
+
+⦁	Search for any altcoins one character among the entire list
+
 Pre-requisites
 --------------
 Android SDK 27
