@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cryptocurrency Rates</string>
+    <string name="app_name">Profitcoin</string>
 
     <string name="item_currency_title_7d">7d:</string>
     <string name="item_currency_tittle_24h">24h:</string>
