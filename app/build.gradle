@@ -45,7 +45,10 @@ dependencies {
     implementation deps.timber
     implementation deps.gson
     implementation deps.picasso
-    implementation 'com.squareup:otto:1.3.8'
+    implementation deps.otto
+
+    implementation deps.firebase.core
+    implementation deps.firebase.auth
 
     implementation deps.retrofit.core
     implementation deps.retrofit.gson
@@ -71,3 +74,5 @@ dependencies {
         exclude group: 'com.google.code.findbugs'
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
