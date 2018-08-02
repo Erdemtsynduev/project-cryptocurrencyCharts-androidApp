@@ -6,7 +6,6 @@ import android.os.Bundle;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.erdemtsynduev.profitcoin.screen.home.HomeActivity;
-import com.erdemtsynduev.profitcoin.screen.signin.SignInActivity;
 
 public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
@@ -22,6 +21,6 @@ public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
     @Override
     public void setAuthorized(boolean isAuthorized) {
-        startActivity(new Intent(this, isAuthorized ? HomeActivity.class : SignInActivity.class));
+        startActivity(new Intent(this, HomeActivity.class));
     }
 }
