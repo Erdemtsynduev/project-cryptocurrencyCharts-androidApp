@@ -1,22 +1,22 @@
 package com.erdemtsynduev.profitcoin.screen.home;
 
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.erdemtsynduev.profitcoin.R;
-import com.erdemtsynduev.profitcoin.screen.currencylist.CurrencyListFragment;
-import com.erdemtsynduev.profitcoin.screen.currencylist.CurrencyListPresenter;
+import com.erdemtsynduev.profitcoin.screen.chartslist.ChartsListFragment;
 import com.erdemtsynduev.profitcoin.screen.portfolio.PortfolioFragment;
-import com.erdemtsynduev.profitcoin.screen.portfolio.PortfolioPresenter;
 import com.erdemtsynduev.profitcoin.screen.settings.SettingsFragment;
-import com.erdemtsynduev.profitcoin.screen.settings.SettingsPresenter;
-import com.erdemtsynduev.profitcoin.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends MvpAppCompatActivity implements HomeView {
+
+    @InjectPresenter
+    HomePresenter mHomePresenter;
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
@@ -31,43 +31,40 @@ public class HomeActivity extends AppCompatActivity {
                 item -> {
                     switch (item.getItemId()) {
                         case R.id.menu_portfolio:
-                            openPortfolioFragment();
+                            mHomePresenter.onPortfolioSelection();
                             return true;
                         case R.id.menu_list_currency:
-                            openCurrencyListFragment();
+                            mHomePresenter.onCurrencyListSelection();
                             return true;
                         case R.id.menu_setting:
-                            openSettingsFragment();
+                            mHomePresenter.onSettingsSelection();
                             return true;
                     }
                     return true;
                 });
     }
 
-    private void openPortfolioFragment() {
-        PortfolioFragment portfolioFragment = PortfolioFragment.newInstance();
-
-        ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(),
-                portfolioFragment, R.id.contentFrame);
-
-        new PortfolioPresenter(portfolioFragment);
+    @Override
+    public void showPortfolioFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contentFrame, PortfolioFragment.getInstance())
+                .commit();
     }
 
-    private void openCurrencyListFragment() {
-        CurrencyListFragment currencyListFragment = CurrencyListFragment.newInstance();
-
-        ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(),
-                currencyListFragment, R.id.contentFrame);
-
-        new CurrencyListPresenter(currencyListFragment);
+    @Override
+    public void showCurrencyListFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contentFrame, ChartsListFragment.getInstance())
+                .commit();
     }
 
-    private void openSettingsFragment() {
-        SettingsFragment settingsFragment = SettingsFragment.newInstance();
-
-        ActivityUtils.replaceFragmentToActivity(getSupportFragmentManager(),
-                settingsFragment, R.id.contentFrame);
-
-        new SettingsPresenter(settingsFragment);
+    @Override
+    public void showSettingsFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contentFrame, SettingsFragment.getInstance())
+                .commit();
     }
 }

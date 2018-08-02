@@ -1,4 +1,4 @@
-package com.erdemtsynduev.profitcoin.screen.portfolio;
+package com.erdemtsynduev.profitcoin.screen.chartslist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,36 +13,36 @@ import com.erdemtsynduev.profitcoin.R;
 
 import butterknife.ButterKnife;
 
-public class PortfolioFragment extends MvpAppCompatFragment implements PortfolioView {
+public class ChartsListFragment extends MvpAppCompatFragment implements ChartsListView {
 
     @InjectPresenter
-    PortfolioPresenter mPortfolioPresenter;
+    ChartsListPresenter mChartsListPresenter;
 
-    public static PortfolioFragment getInstance() {
-        return new PortfolioFragment();
+    public static ChartsListFragment getInstance() {
+        return new ChartsListFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_portfolio, container, false);
+        return inflater.inflate(R.layout.fragment_chartslist, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
     }
 
     @Override
-    public void showPortfolioList() {
+    public void showChartsList() {
 
     }
 
     @Override
-    public void showEmptyPortfolioList() {
+    public void showEmptyChartsList() {
 
     }
 }

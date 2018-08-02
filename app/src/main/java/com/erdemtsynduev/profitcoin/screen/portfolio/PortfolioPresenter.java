@@ -1,20 +1,13 @@
 package com.erdemtsynduev.profitcoin.screen.portfolio;
 
-import android.support.annotation.NonNull;
+import com.arellomobile.mvp.MvpPresenter;
 
-import static com.erdemtsynduev.profitcoin.utils.Utils.checkNotNull;
-
-public class PortfolioPresenter implements PortfolioContract.Presenter {
-
-    private final PortfolioContract.View mPortfolioView;
-
-    public PortfolioPresenter(@NonNull PortfolioContract.View tasksView) {
-        mPortfolioView = checkNotNull(tasksView);
-        mPortfolioView.setPresenter(this);
-    }
+public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
 
     @Override
-    public void start() {
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
 
+        getViewState().showEmptyPortfolioList();
     }
 }
