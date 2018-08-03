@@ -1,7 +1,7 @@
 package com.erdemtsynduev.profitcoin.network;
 
 import com.erdemtsynduev.profitcoin.network.api.CoinMarketCapApi;
-import com.erdemtsynduev.profitcoin.network.model.ResponseItem;
+import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.ListAllCryptocurrencies;
 
 import io.reactivex.Observable;
 
@@ -13,7 +13,7 @@ public class CoinMarketCapService {
         mCoinMarketCapApi = coinMarketCapApi;
     }
 
-    public Observable<ResponseItem> getTicker() {
+    public Observable<ListAllCryptocurrencies> getTicker() {
         return mCoinMarketCapApi.getTicker();
     }
 }
