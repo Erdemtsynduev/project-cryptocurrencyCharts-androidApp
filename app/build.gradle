@@ -46,13 +46,14 @@ dependencies {
     implementation deps.gson
     implementation deps.picasso
     implementation deps.otto
+    implementation deps.baseRecyclerViewAdapterHelper
 
     implementation deps.firebase.core
     implementation deps.firebase.auth
 
     implementation deps.retrofit.core
     implementation deps.retrofit.gson
-    implementation deps.retrofit.rxjava
+    implementation deps.retrofit.rxjava2adapter
 
     implementation deps.rx.core
     implementation deps.rx.android
