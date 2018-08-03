@@ -1,13 +1,20 @@
 package com.erdemtsynduev.profitcoin.screen.settings;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
+@InjectViewState
 public class SettingsPresenter extends MvpPresenter<SettingsView> {
 
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
+    public void onShowSuccessClearData() {
+        getViewState().showSuccessClearData();
+    }
 
-        getViewState().showEmptyLogIn();
+    public void onShowSuccessExportSetting() {
+        getViewState().showSuccessExportSetting();
+    }
+
+    public void onShowSuccessImportSetting() {
+        getViewState().showSuccessImportSetting();
     }
 }

@@ -1,4 +1,4 @@
-package com.erdemtsynduev.profitcoin.screen.settings;
+package com.erdemtsynduev.profitcoin.screen.account;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,20 +13,20 @@ import com.erdemtsynduev.profitcoin.R;
 
 import butterknife.ButterKnife;
 
-public class SettingsFragment extends MvpAppCompatFragment implements SettingsView {
+public class AccountFragment extends MvpAppCompatFragment implements AccountView {
 
     @InjectPresenter
-    SettingsPresenter mSettingsPresenter;
+    AccountPresenter mAccountPresenter;
 
-    public static SettingsFragment getInstance() {
-        return new SettingsFragment();
+    public static AccountFragment getInstance() {
+        return new AccountFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 
     @Override

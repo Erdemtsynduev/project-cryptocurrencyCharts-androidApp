@@ -6,9 +6,9 @@ import android.os.Bundle;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.erdemtsynduev.profitcoin.R;
+import com.erdemtsynduev.profitcoin.screen.account.AccountFragment;
 import com.erdemtsynduev.profitcoin.screen.chartslist.ChartsListFragment;
 import com.erdemtsynduev.profitcoin.screen.portfolio.PortfolioFragment;
-import com.erdemtsynduev.profitcoin.screen.settings.SettingsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,11 +37,13 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
                             mHomePresenter.onCurrencyListSelection();
                             return true;
                         case R.id.menu_setting:
-                            mHomePresenter.onSettingsSelection();
+                            mHomePresenter.onAccountSelection();
                             return true;
                     }
                     return true;
                 });
+
+        showCurrencyListFragment();
     }
 
     @Override
@@ -61,10 +63,10 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
     }
 
     @Override
-    public void showSettingsFragment() {
+    public void showAccountFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.contentFrame, SettingsFragment.getInstance())
+                .replace(R.id.contentFrame, AccountFragment.getInstance())
                 .commit();
     }
 }

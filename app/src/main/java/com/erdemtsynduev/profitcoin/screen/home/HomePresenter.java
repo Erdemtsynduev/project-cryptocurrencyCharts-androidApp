@@ -1,7 +1,9 @@
 package com.erdemtsynduev.profitcoin.screen.home;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
+@InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
 
     public void onPortfolioSelection() {
@@ -12,7 +14,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         getViewState().showCurrencyListFragment();
     }
 
-    public void onSettingsSelection() {
-        getViewState().showSettingsFragment();
+    public void onAccountSelection() {
+        getViewState().showAccountFragment();
     }
 }

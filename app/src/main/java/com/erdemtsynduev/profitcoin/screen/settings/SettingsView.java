@@ -4,7 +4,9 @@ import com.arellomobile.mvp.MvpView;
 
 public interface SettingsView extends MvpView {
 
-    void showEmptyLogIn();
+    void showSuccessImportSetting();
 
-    void showLogIn();
+    void showSuccessExportSetting();
+
+    void showSuccessClearData();
 }
