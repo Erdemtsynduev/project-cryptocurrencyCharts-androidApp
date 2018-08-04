@@ -33,7 +33,7 @@
             android:gravity="center"
             android:text="Sorting"
             android:textColor="@color/colorText"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

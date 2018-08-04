@@ -1,5 +1,6 @@
 package com.erdemtsynduev.profitcoin.screen.chartslist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
+import com.erdemtsynduev.profitcoin.screen.chartsdetail.ChartsDetailActivity;
 import com.erdemtsynduev.profitcoin.screen.chartslist.adapter.ChartsListAdapter;
 
 import java.util.List;
@@ -57,6 +59,12 @@ public class ChartsListFragment extends MvpAppCompatFragment implements ChartsLi
         mChartsListAdapter = new ChartsListAdapter();
         mChartsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
 
+        mChartsListAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            if ((adapter.getItem(position)) != null) {
+                mChartsListPresenter.openScreenDetail((Datum) adapter.getItem(position));
+            }
+        });
+
         mChartsListRecycler.setAdapter(mChartsListAdapter);
 
         mChartsListPresenter.getData();
@@ -70,5 +78,12 @@ public class ChartsListFragment extends MvpAppCompatFragment implements ChartsLi
     @Override
     public void showEmptyChartsList() {
 
+    }
+
+    @Override
+    public void openScreenDetail(Datum datum) {
+        Intent intent = new Intent(getContext(), ChartsDetailActivity.class);
+        intent.putExtra("datum", datum);
+        startActivity(intent);
     }
 }

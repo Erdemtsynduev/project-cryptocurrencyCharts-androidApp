@@ -3,6 +3,7 @@ package com.erdemtsynduev.profitcoin.screen.chartslist;
 import com.arellomobile.mvp.InjectViewState;
 import com.erdemtsynduev.profitcoin.ExtendApplication;
 import com.erdemtsynduev.profitcoin.network.CoinMarketCapService;
+import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.screen.BasePresenter;
 
 import javax.inject.Inject;
@@ -30,6 +31,10 @@ public class ChartsListPresenter extends BasePresenter<ChartsListView> {
                 });
 
         unsubscribeOnDestroy(disposable);
+    }
+
+    public void openScreenDetail(Datum datum){
+        getViewState().openScreenDetail(datum);
     }
 
     @Override

@@ -1,4 +1,12 @@
 package com.erdemtsynduev.profitcoin.screen.chartsdetail;
 
-public interface ChartsDetailView {
+import com.arellomobile.mvp.MvpView;
+
+public interface ChartsDetailView extends MvpView {
+
+    void showAddFavoriteSuccess();
+
+    void showErrorAddFavorite();
+
+    void showChartsDetail();
 }
