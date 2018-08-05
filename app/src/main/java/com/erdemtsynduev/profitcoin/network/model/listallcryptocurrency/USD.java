@@ -1,9 +1,12 @@
 package com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class USD {
+public class USD implements Parcelable {
 
     @SerializedName("price")
     @Expose
@@ -72,4 +75,42 @@ public class USD {
         this.marketCap = marketCap;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.price);
+        dest.writeString(this.volume24h);
+        dest.writeString(this.percentChange1h);
+        dest.writeString(this.percentChange24h);
+        dest.writeString(this.percentChange7d);
+        dest.writeString(this.marketCap);
+    }
+
+    public USD() {
+    }
+
+    protected USD(Parcel in) {
+        this.price = in.readString();
+        this.volume24h = in.readString();
+        this.percentChange1h = in.readString();
+        this.percentChange24h = in.readString();
+        this.percentChange7d = in.readString();
+        this.marketCap = in.readString();
+    }
+
+    public static final Parcelable.Creator<USD> CREATOR = new Parcelable.Creator<USD>() {
+        @Override
+        public USD createFromParcel(Parcel source) {
+            return new USD(source);
+        }
+
+        @Override
+        public USD[] newArray(int size) {
+            return new USD[size];
+        }
+    };
 }

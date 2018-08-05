@@ -1,9 +1,12 @@
 package com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class Datum implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -127,4 +130,52 @@ public class Datum {
         this.quote = quote;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.symbol);
+        dest.writeString(this.slug);
+        dest.writeString(this.cmcRank);
+        dest.writeString(this.numMarkets);
+        dest.writeString(this.circulatingSupply);
+        dest.writeString(this.totalSupply);
+        dest.writeString(this.maxSupply);
+        dest.writeString(this.lastUpdated);
+        dest.writeParcelable(this.quote, flags);
+    }
+
+    public Datum() {
+    }
+
+    protected Datum(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.symbol = in.readString();
+        this.slug = in.readString();
+        this.cmcRank = in.readString();
+        this.numMarkets = in.readString();
+        this.circulatingSupply = in.readString();
+        this.totalSupply = in.readString();
+        this.maxSupply = in.readString();
+        this.lastUpdated = in.readString();
+        this.quote = in.readParcelable(Quote.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Datum> CREATOR = new Parcelable.Creator<Datum>() {
+        @Override
+        public Datum createFromParcel(Parcel source) {
+            return new Datum(source);
+        }
+
+        @Override
+        public Datum[] newArray(int size) {
+            return new Datum[size];
+        }
+    };
 }
