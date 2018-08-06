@@ -58,6 +58,8 @@ dependencies {
     implementation deps.rx.core
     implementation deps.rx.android
 
+    implementation deps.sqliteWrapper
+
     implementation deps.butterknife.core
     annotationProcessor deps.butterknife.compiler
 
