@@ -1,5 +1,7 @@
 package com.erdemtsynduev.profitcoin.screen.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 
@@ -70,5 +72,35 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
                 .beginTransaction()
                 .replace(R.id.contentFrame, AccountFragment.getInstance())
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        dialogFinish();
+    }
+
+    private void dialogFinish() {
+        // alertdialog for exit the app
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set dialog message
+        alertDialogBuilder
+                .setTitle("your title")
+                .setMessage("your message")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    finishAffinity();
+                    System.exit(0);
+                })
+                .setNeutralButton("CANCEL", (dialog, which) -> {
+                    dialog.cancel();
+                })
+                .setNegativeButton("NO", (dialog, which) -> {
+                    dialog.cancel();
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.show();
     }
 }

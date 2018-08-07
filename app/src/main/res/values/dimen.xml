@@ -2,4 +2,7 @@
 <resources>
     <dimen name="cardview_default_margin">8dp</dimen>
     <dimen name="toolbar_height">52dp</dimen>
+
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_header_padding">8dp</dimen>
 </resources>
