@@ -8,6 +8,8 @@ import com.erdemtsynduev.profitcoin.di.AppComponent;
 import com.erdemtsynduev.profitcoin.di.DaggerAppComponent;
 import com.erdemtsynduev.profitcoin.di.Modules.ContextModule;
 
+import ru.arturvasilov.sqlite.core.SQLite;
+
 public class ExtendApplication extends Application {
 
     private static AppComponent sAppComponent;
@@ -15,6 +17,8 @@ public class ExtendApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        SQLite.initialize(this);
 
         sAppComponent = DaggerAppComponent.builder()
                 .contextModule(new ContextModule(this))

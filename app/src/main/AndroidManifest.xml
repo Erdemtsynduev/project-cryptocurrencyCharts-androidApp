@@ -26,6 +26,14 @@
         </activity>
         <activity android:name=".screen.settings.SettingsActivity" />
         <activity android:name=".screen.chartsdetail.ChartsDetailActivity" />
+
+        <service android:name=".network.NetworkService" />
+
+        <provider
+            android:name=".db.sqllite.CoinContentProvider"
+            android:authorities="com.erdemtsynduev.profitcoin"
+            android:exported="false" />
+
     </application>
 
 </manifest>
