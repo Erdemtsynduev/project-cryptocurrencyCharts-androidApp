@@ -8,6 +8,7 @@ import com.erdemtsynduev.profitcoin.di.AppComponent;
 import com.erdemtsynduev.profitcoin.di.DaggerAppComponent;
 import com.erdemtsynduev.profitcoin.di.Modules.ContextModule;
 
+import io.paperdb.Paper;
 import ru.arturvasilov.sqlite.core.SQLite;
 
 public class ExtendApplication extends Application {
@@ -19,6 +20,8 @@ public class ExtendApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // Init NoSQL DB
+        Paper.init(this);
         SQLite.initialize(this);
 
         sAppComponent = DaggerAppComponent.builder()

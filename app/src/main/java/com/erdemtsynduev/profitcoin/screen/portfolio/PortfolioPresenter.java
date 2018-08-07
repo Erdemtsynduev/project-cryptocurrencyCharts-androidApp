@@ -14,7 +14,6 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.arturvasilov.sqlite.core.SQLite;
-import ru.arturvasilov.sqlite.core.Where;
 import ru.arturvasilov.sqlite.rx.RxSQLite;
 
 @InjectViewState

@@ -19,11 +19,13 @@ import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.screen.coindetail.CoinDetailActivity;
 import com.erdemtsynduev.profitcoin.screen.coinlist.adapter.CoinListAdapter;
+import com.erdemtsynduev.profitcoin.widget.WidgetService;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class PortfolioFragment extends MvpAppCompatFragment implements PortfolioView {
 
@@ -78,6 +80,7 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
 
     @Override
     public void showPortfolioList(List<Datum> datumList) {
+        WidgetService.updateWidget(getContext(), datumList);
         mCoinListAdapter.setNewData(datumList);
     }
 

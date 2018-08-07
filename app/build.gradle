@@ -47,6 +47,7 @@ dependencies {
     implementation deps.picasso
     implementation deps.otto
     implementation deps.baseRecyclerViewAdapterHelper
+    implementation deps.paperdb
 
     implementation deps.firebase.core
     implementation deps.firebase.auth

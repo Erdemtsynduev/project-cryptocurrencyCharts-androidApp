@@ -5,8 +5,13 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.erdemtsynduev.profitcoin.R;
+import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 /**
  * WidgetDataProvider acts as the adapter for the collection view widget,
@@ -16,7 +21,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     private static final String TAG = "WidgetDataProvider";
 
-    List<String> mCollection = new ArrayList<>();
+    List<Datum> mDatumList = new ArrayList<>();
     Context mContext = null;
 
     public WidgetDataProvider(Context context, Intent intent) {
@@ -25,12 +30,12 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public void onCreate() {
-        initData();
+
     }
 
     @Override
     public void onDataSetChanged() {
-        initData();
+        mDatumList = Paper.book().read("datumList");
     }
 
     @Override
@@ -40,14 +45,33 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public int getCount() {
-        return mCollection.size();
+        return mDatumList.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews view = new RemoteViews(mContext.getPackageName(),
-                android.R.layout.simple_list_item_1);
-        view.setTextViewText(android.R.id.text1, mCollection.get(position));
+                R.layout.list_widget_item);
+
+        if (mDatumList != null && !mDatumList.isEmpty()) {
+            view.setTextViewText(R.id.widget_text_symbol_currency, mDatumList.get(position).getSymbol());
+            view.setTextViewText(R.id.widget_text_name_currency, mDatumList.get(position).getName());
+            if (mDatumList.get(position).getQuote().getUSD().getPercentChange24h() != null &&
+                    mDatumList.get(position).getQuote().getUSD().getPercentChange24h().contains("-")) {
+                view.setTextColor(R.id.widget_text_hours, mContext.getResources().getColor(R.color.colorNegative));
+            } else {
+                view.setTextColor(R.id.widget_text_hours, mContext.getResources().getColor(R.color.colorPositive));
+            }
+            if (mDatumList.get(position).getQuote().getUSD().getPercentChange7d() != null &&
+                    mDatumList.get(position).getQuote().getUSD().getPercentChange7d().contains("-")) {
+                view.setTextColor(R.id.widget_text_days, mContext.getResources().getColor(R.color.colorNegative));
+            } else {
+                view.setTextColor(R.id.widget_text_days, mContext.getResources().getColor(R.color.colorPositive));
+            }
+            view.setTextViewText(R.id.widget_text_hours, mDatumList.get(position).getQuote().getUSD().getPercentChange24h());
+            view.setTextViewText(R.id.widget_text_days, mDatumList.get(position).getQuote().getUSD().getPercentChange7d());
+        }
+
         return view;
     }
 
@@ -69,12 +93,5 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     @Override
     public boolean hasStableIds() {
         return true;
-    }
-
-    private void initData() {
-        mCollection.clear();
-        for (int i = 1; i <= 10; i++) {
-            mCollection.add("ListView item " + i);
-        }
     }
 }
