@@ -1,4 +1,4 @@
-package com.erdemtsynduev.profitcoin.screen.chartslist;
+package com.erdemtsynduev.profitcoin.screen.coinlist;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,33 +16,33 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
-import com.erdemtsynduev.profitcoin.screen.chartsdetail.ChartsDetailActivity;
-import com.erdemtsynduev.profitcoin.screen.chartslist.adapter.ChartsListAdapter;
+import com.erdemtsynduev.profitcoin.screen.coindetail.CoinDetailActivity;
+import com.erdemtsynduev.profitcoin.screen.coinlist.adapter.CoinListAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChartsListFragment extends MvpAppCompatFragment implements ChartsListView {
+public class CoinListFragment extends MvpAppCompatFragment implements CoinListView {
 
     @InjectPresenter
-    ChartsListPresenter mChartsListPresenter;
+    CoinListPresenter mCoinListPresenter;
 
     @BindView(R.id.recyclerView)
     RecyclerView mChartsListRecycler;
 
-    private ChartsListAdapter mChartsListAdapter;
+    private CoinListAdapter mCoinListAdapter;
 
-    public static ChartsListFragment getInstance() {
-        return new ChartsListFragment();
+    public static CoinListFragment getInstance() {
+        return new CoinListFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chartslist, container, false);
+        return inflater.inflate(R.layout.fragment_coinlist, container, false);
     }
 
     @Override
@@ -56,33 +56,33 @@ public class ChartsListFragment extends MvpAppCompatFragment implements ChartsLi
                 DividerItemDecoration.VERTICAL);
         mChartsListRecycler.addItemDecoration(dividerItemDecoration);
 
-        mChartsListAdapter = new ChartsListAdapter();
-        mChartsListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        mCoinListAdapter = new CoinListAdapter(getContext());
+        mCoinListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
 
-        mChartsListAdapter.setOnItemClickListener((adapter, view1, position) -> {
+        mCoinListAdapter.setOnItemClickListener((adapter, view1, position) -> {
             if ((adapter.getItem(position)) != null) {
-                mChartsListPresenter.openScreenDetail((Datum) adapter.getItem(position));
+                mCoinListPresenter.openScreenDetail((Datum) adapter.getItem(position));
             }
         });
 
-        mChartsListRecycler.setAdapter(mChartsListAdapter);
+        mChartsListRecycler.setAdapter(mCoinListAdapter);
 
-        mChartsListPresenter.getData();
+        mCoinListPresenter.getData();
     }
 
     @Override
-    public void showChartsList(List<Datum> datumList) {
-        mChartsListAdapter.setNewData(datumList);
+    public void showCoinList(List<Datum> datumList) {
+        mCoinListAdapter.setNewData(datumList);
     }
 
     @Override
-    public void showEmptyChartsList() {
+    public void showEmptyCoinList() {
 
     }
 
     @Override
     public void openScreenDetail(Datum datum) {
-        Intent intent = new Intent(getContext(), ChartsDetailActivity.class);
+        Intent intent = new Intent(getContext(), CoinDetailActivity.class);
         intent.putExtra("datum", datum);
         startActivity(intent);
     }

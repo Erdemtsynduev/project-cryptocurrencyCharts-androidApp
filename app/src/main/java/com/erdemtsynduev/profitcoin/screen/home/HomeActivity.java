@@ -7,7 +7,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.screen.account.AccountFragment;
-import com.erdemtsynduev.profitcoin.screen.chartslist.ChartsListFragment;
+import com.erdemtsynduev.profitcoin.screen.coinlist.CoinListFragment;
 import com.erdemtsynduev.profitcoin.screen.portfolio.PortfolioFragment;
 
 import butterknife.BindView;
@@ -43,6 +43,8 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
                     return true;
                 });
 
+        bottomNavigationView.setSelectedItemId(R.id.menu_list_currency);
+
         showCurrencyListFragment();
     }
 
@@ -58,7 +60,7 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
     public void showCurrencyListFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.contentFrame, ChartsListFragment.getInstance())
+                .replace(R.id.contentFrame, CoinListFragment.getInstance())
                 .commit();
     }
 

@@ -5,4 +5,7 @@
     <color name="colorAccent">#718792</color>
     <color name="colorSort">@color/colorAccent</color>
     <color name="colorText">#ffffff</color>
+    <color name="white_smoke">#f7f7f7</color>
+    <color name="colorPositive">#80e27e</color>
+    <color name="colorNegative">#ff7961</color>
 </resources>

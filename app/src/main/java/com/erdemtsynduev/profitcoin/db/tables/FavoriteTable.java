@@ -16,14 +16,14 @@ public class FavoriteTable extends BaseTable<FavoriteCoin> {
 
     public static final Table<FavoriteCoin> TABLE = new FavoriteTable();
 
-    public static final String ID = "id";
-    public static final String COIN_NAME = "name";
+    public static final String ID_FAVORITE = "id_favorite";
+    public static final String COIN_NAME_FAVORITE = "name_favorite";
 
     @Override
     public void onCreate(@NonNull SQLiteDatabase database) {
         TableBuilder.create(this)
-                .textColumn(ID)
-                .textColumn(COIN_NAME)
+                .textColumn(ID_FAVORITE)
+                .textColumn(COIN_NAME_FAVORITE)
                 .execute(database);
     }
 
@@ -31,8 +31,8 @@ public class FavoriteTable extends BaseTable<FavoriteCoin> {
     @Override
     public ContentValues toValues(@NonNull FavoriteCoin favoriteCoin) {
         ContentValues values = new ContentValues();
-        values.put(ID, favoriteCoin.getId());
-        values.put(COIN_NAME, favoriteCoin.getName());
+        values.put(ID_FAVORITE, favoriteCoin.getId());
+        values.put(COIN_NAME_FAVORITE, favoriteCoin.getName());
         return values;
     }
 
@@ -40,8 +40,8 @@ public class FavoriteTable extends BaseTable<FavoriteCoin> {
     @Override
     public FavoriteCoin fromCursor(@NonNull Cursor cursor) {
         FavoriteCoin favoriteCoin = new FavoriteCoin();
-        favoriteCoin.setId(cursor.getString(cursor.getColumnIndex(ID)));
-        favoriteCoin.setName(cursor.getString(cursor.getColumnIndex(COIN_NAME)));
+        favoriteCoin.setId(cursor.getString(cursor.getColumnIndex(ID_FAVORITE)));
+        favoriteCoin.setName(cursor.getString(cursor.getColumnIndex(COIN_NAME_FAVORITE)));
 
         return favoriteCoin;
     }

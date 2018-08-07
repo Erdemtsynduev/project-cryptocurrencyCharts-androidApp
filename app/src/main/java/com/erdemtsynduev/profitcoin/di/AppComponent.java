@@ -7,7 +7,7 @@ import com.erdemtsynduev.profitcoin.di.Modules.CoinMarketCapModule;
 import com.erdemtsynduev.profitcoin.di.Modules.ContextModule;
 import com.erdemtsynduev.profitcoin.network.CoinMarketCapService;
 import com.erdemtsynduev.profitcoin.network.NetworkService;
-import com.erdemtsynduev.profitcoin.screen.chartslist.ChartsListPresenter;
+import com.erdemtsynduev.profitcoin.screen.coinlist.CoinListPresenter;
 import com.squareup.otto.Bus;
 
 import javax.inject.Singleton;
@@ -23,6 +23,6 @@ public interface AppComponent {
 
     CoinMarketCapService getCoinMarketCapService();
 
-    void inject(ChartsListPresenter presenter);
+    void inject(CoinListPresenter presenter);
     void inject(NetworkService networkService);
 }

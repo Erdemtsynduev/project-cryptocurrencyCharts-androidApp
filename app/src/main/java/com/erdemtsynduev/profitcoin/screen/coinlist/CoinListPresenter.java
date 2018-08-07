@@ -1,4 +1,4 @@
-package com.erdemtsynduev.profitcoin.screen.chartslist;
+package com.erdemtsynduev.profitcoin.screen.coinlist;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.erdemtsynduev.profitcoin.ExtendApplication;
@@ -26,16 +26,25 @@ import ru.arturvasilov.sqlite.core.Where;
 import ru.arturvasilov.sqlite.rx.RxSQLite;
 
 @InjectViewState
-public class ChartsListPresenter extends BasePresenter<ChartsListView> implements BasicTableObserver {
+public class CoinListPresenter extends BasePresenter<CoinListView> implements BasicTableObserver {
 
     @Inject
     CoinMarketCapService mCoinMarketCapService;
 
-    public ChartsListPresenter() {
+    public CoinListPresenter() {
         ExtendApplication.getAppComponent().inject(this);
     }
 
     public void getData() {
+        if (ExtendApplication.getIsFirstRun()) {
+            getDataFromDb();
+        } else {
+            ExtendApplication.setIsFirstRun(true);
+            setDataList(null);
+        }
+    }
+
+    private void getDataFromDb() {
         RxSQLite.get().query(CoinTable.TABLE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,9 +55,9 @@ public class ChartsListPresenter extends BasePresenter<ChartsListView> implement
                 });
     }
 
-    private void setDataList(List<Datum> dataList){
+    private void setDataList(List<Datum> dataList) {
         if (dataList != null && !dataList.isEmpty()) {
-            getViewState().showChartsList(dataList);
+            getViewState().showCoinList(dataList);
         } else {
             SQLite.get().registerObserver(RequestTable.TABLE, this);
             Request request = new Request(NetworkRequest.LIST_COIN);
@@ -64,7 +73,7 @@ public class ChartsListPresenter extends BasePresenter<ChartsListView> implement
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
 
-        getViewState().showEmptyChartsList();
+        getViewState().showEmptyCoinList();
     }
 
     @Override
@@ -84,7 +93,7 @@ public class ChartsListPresenter extends BasePresenter<ChartsListView> implement
                             .observeOn(AndroidSchedulers.mainThread());
                 })
                 .subscribe(coin -> {
-                    getViewState().showChartsList(coin);
+                    getViewState().showCoinList(coin);
                 }, throwable -> {
                     throwable.printStackTrace();
                 });

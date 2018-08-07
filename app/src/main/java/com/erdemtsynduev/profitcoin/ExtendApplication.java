@@ -13,6 +13,7 @@ import ru.arturvasilov.sqlite.core.SQLite;
 public class ExtendApplication extends Application {
 
     private static AppComponent sAppComponent;
+    private static boolean appIsFirstRun = false;
 
     @Override
     public void onCreate() {
@@ -30,6 +31,13 @@ public class ExtendApplication extends Application {
         return sAppComponent;
     }
 
+    public static boolean getIsFirstRun() {
+        return appIsFirstRun;
+    }
+
+    public static void setIsFirstRun(boolean isFirstRun) {
+        appIsFirstRun = isFirstRun;
+    }
 
     @VisibleForTesting
     public static void setAppComponent(@NonNull AppComponent appComponent) {

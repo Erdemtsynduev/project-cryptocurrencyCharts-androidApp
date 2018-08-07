@@ -16,4 +16,15 @@
     <string name="text_setting_image_symbol_content">Image symbol cryptocurrency</string>
     <string name="text_setting_about_program">About program</string>
     <string name="text_setting_exit">Exit</string>
+
+    <string name="refresh">Refresh</string>
+    <string name="loading">Loading</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
+    <string name="commit">Commit</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="empty">Empty</string>
+
+    <string name="profile_save">Save</string>
 </resources>

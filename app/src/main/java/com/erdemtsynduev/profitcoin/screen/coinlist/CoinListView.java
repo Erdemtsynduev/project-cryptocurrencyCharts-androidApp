@@ -1,15 +1,15 @@
-package com.erdemtsynduev.profitcoin.screen.chartslist;
+package com.erdemtsynduev.profitcoin.screen.coinlist;
 
 import com.arellomobile.mvp.MvpView;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 
 import java.util.List;
 
-public interface ChartsListView extends MvpView {
+public interface CoinListView extends MvpView {
 
-    void showChartsList(List<Datum> datumList);
+    void showCoinList(List<Datum> datumList);
 
-    void showEmptyChartsList();
+    void showEmptyCoinList();
 
     void openScreenDetail(Datum datum);
 }
