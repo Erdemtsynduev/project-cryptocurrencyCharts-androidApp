@@ -12,4 +12,6 @@ public interface HomeView extends MvpView {
     void showCurrencyListFragment();
 
     void showAccountFragment();
+
+    void showDialogExit();
 }

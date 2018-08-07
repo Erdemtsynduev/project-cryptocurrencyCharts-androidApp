@@ -17,4 +17,8 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     public void onAccountSelection() {
         getViewState().showAccountFragment();
     }
+
+    public void showDialogExit() {
+        getViewState().showDialogExit();
+    }
 }

@@ -75,32 +75,30 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
     }
 
     @Override
-    public void onBackPressed() {
-        dialogFinish();
-    }
-
-    private void dialogFinish() {
-        // alertdialog for exit the app
+    public void showDialogExit() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        // set dialog message
         alertDialogBuilder
-                .setTitle("your title")
-                .setMessage("your message")
+                .setTitle("PROFITCOIN")
+                .setMessage("Do you really want to quit?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    finishAffinity();
-                    System.exit(0);
+                .setPositiveButton("YES", (dialog, which) -> {
+                    closeAppliction();
                 })
-                .setNeutralButton("CANCEL", (dialog, which) -> {
-                    dialog.cancel();
-                })
-                .setNegativeButton("NO", (dialog, which) -> {
+                .setNegativeButton("CANCEL", (dialog, which) -> {
                     dialog.cancel();
                 });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
-
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        mHomePresenter.showDialogExit();
+    }
+
+    private void closeAppliction() {
+        finishAffinity();
+        System.exit(0);
     }
 }
