@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Comparator;
+
 public class Datum implements Parcelable {
 
     @SerializedName("id")
@@ -51,6 +53,9 @@ public class Datum implements Parcelable {
     }
 
     public String getName() {
+        if (name == null) {
+            return "";
+        }
         return name;
     }
 
@@ -178,4 +183,17 @@ public class Datum implements Parcelable {
             return new Datum[size];
         }
     };
+
+    public static Comparator<Datum> COMPARE_BY_NAME = (one, other) ->
+            one.name.compareTo(other.name);
+
+    public static Comparator<Datum> COMPARE_BY_PRICE = (one, other) ->
+            one.quote.getUSD().getPrice().compareTo(other.quote.getUSD().getPrice());
+
+    public static Comparator<Datum> COMPARE_BY_SEVEN_DAY = (one, other) ->
+            one.quote.getUSD().getPercentChange7d().compareTo(other.quote.getUSD().getPercentChange7d());
+
+    public static Comparator<Datum> COMPARE_BY_DAY = (one, other) ->
+            one.quote.getUSD().getPercentChange24h().compareTo(other.quote.getUSD().getPercentChange24h());
+
 }

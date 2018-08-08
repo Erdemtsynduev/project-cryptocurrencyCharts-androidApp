@@ -13,6 +13,8 @@ import com.erdemtsynduev.profitcoin.network.model.request.RequestStatus;
 import com.erdemtsynduev.profitcoin.screen.BasePresenter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,6 +33,8 @@ public class CoinListPresenter extends BasePresenter<CoinListView> implements Ba
     @Inject
     CoinMarketCapService mCoinMarketCapService;
 
+    private List<Datum> datumListSaved = new ArrayList<>();
+
     public CoinListPresenter() {
         ExtendApplication.getAppComponent().inject(this);
     }
@@ -44,11 +48,40 @@ public class CoinListPresenter extends BasePresenter<CoinListView> implements Ba
         }
     }
 
+    public void sortByName() {
+        if (!datumListSaved.isEmpty()) {
+            Collections.sort(datumListSaved, Datum.COMPARE_BY_NAME);
+            setDataList(datumListSaved);
+        }
+    }
+
+    public void sortByPrice() {
+        if (!datumListSaved.isEmpty()) {
+            Collections.sort(datumListSaved, Datum.COMPARE_BY_PRICE);
+            setDataList(datumListSaved);
+        }
+    }
+
+    public void sortByChangeDay() {
+        if (!datumListSaved.isEmpty()) {
+            Collections.sort(datumListSaved, Datum.COMPARE_BY_DAY);
+            setDataList(datumListSaved);
+        }
+    }
+
+    public void sortByChangeSevenDay() {
+        if (!datumListSaved.isEmpty()) {
+            Collections.sort(datumListSaved, Datum.COMPARE_BY_SEVEN_DAY);
+            setDataList(datumListSaved);
+        }
+    }
+
     private void getDataFromDb() {
         RxSQLite.get().query(CoinTable.TABLE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(coin -> {
+                    datumListSaved = coin;
                     setDataList(coin);
                 }, throwable -> {
                     throwable.printStackTrace();
@@ -93,6 +126,7 @@ public class CoinListPresenter extends BasePresenter<CoinListView> implements Ba
                             .observeOn(AndroidSchedulers.mainThread());
                 })
                 .subscribe(coin -> {
+                    datumListSaved = coin;
                     getViewState().showCoinList(coin);
                 }, throwable -> {
                     throwable.printStackTrace();

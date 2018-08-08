@@ -21,7 +21,6 @@ import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.screen.coindetail.CoinDetailActivity;
 import com.erdemtsynduev.profitcoin.screen.coinlist.adapter.CoinListAdapter;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.List;
@@ -41,6 +40,8 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
     LinearLayout mLinearLayoutSorting;
 
     private CoinListAdapter mCoinListAdapter;
+
+    private SelectTypeSort selectTypeSort;
 
     public static CoinListFragment getInstance() {
         return new CoinListFragment();
@@ -92,11 +93,30 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
 
         LinearLayout closeDialog = (LinearLayout) dialog.findViewById(R.id.linearLayoutCloseDialog);
         LinearLayout sortByName = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortName);
+        LinearLayout sortByTotalSum = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortTotalSum);
+        LinearLayout sortByChangeDay = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortChangeDay);
+        LinearLayout sortBySevenDay = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortChangeSevenDay);
 
         closeDialog.setOnClickListener(v -> dialog.dismiss());
 
         sortByName.setOnClickListener(v -> {
+            mCoinListPresenter.sortByName();
+            dialog.dismiss();
+        });
 
+        sortByTotalSum.setOnClickListener(v -> {
+            mCoinListPresenter.sortByPrice();
+            dialog.dismiss();
+        });
+
+        sortByChangeDay.setOnClickListener(v -> {
+            mCoinListPresenter.sortByChangeDay();
+            dialog.dismiss();
+        });
+
+        sortBySevenDay.setOnClickListener(v -> {
+            mCoinListPresenter.sortByChangeSevenDay();
+            dialog.dismiss();
         });
 
         dialog.show();

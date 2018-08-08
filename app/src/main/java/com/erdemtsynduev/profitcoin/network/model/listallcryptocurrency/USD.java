@@ -28,6 +28,9 @@ public class USD implements Parcelable {
     private String marketCap;
 
     public String getPrice() {
+        if (price == null) {
+            return "0";
+        }
         return price;
     }
 
@@ -52,6 +55,9 @@ public class USD implements Parcelable {
     }
 
     public String getPercentChange24h() {
+        if (percentChange24h == null) {
+            return "0";
+        }
         return percentChange24h;
     }
 
@@ -60,6 +66,9 @@ public class USD implements Parcelable {
     }
 
     public String getPercentChange7d() {
+        if (percentChange7d == null) {
+            return "0";
+        }
         return percentChange7d;
     }
 
