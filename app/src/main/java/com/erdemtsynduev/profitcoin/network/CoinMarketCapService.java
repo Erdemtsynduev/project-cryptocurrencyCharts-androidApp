@@ -1,5 +1,6 @@
 package com.erdemtsynduev.profitcoin.network;
 
+import com.erdemtsynduev.profitcoin.ExtendApplication;
 import com.erdemtsynduev.profitcoin.network.api.CoinMarketCapApi;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.ListAllCryptocurrencies;
 
@@ -14,6 +15,6 @@ public class CoinMarketCapService {
     }
 
     public Call<ListAllCryptocurrencies> getTicker() {
-        return mCoinMarketCapApi.getTicker();
+        return mCoinMarketCapApi.getTicker(ExtendApplication.getApiKey());
     }
 }

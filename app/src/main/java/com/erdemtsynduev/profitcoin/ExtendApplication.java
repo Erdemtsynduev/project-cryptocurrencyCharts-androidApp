@@ -17,6 +17,7 @@ public class ExtendApplication extends Application {
     private static AppComponent sAppComponent;
     private static boolean appIsFirstRun = false;
     private static FirebaseAuth mAuth;
+    private static String apiKey = BuildConfig.API_KEY;
 
     @Override
     public void onCreate() {
@@ -49,6 +50,14 @@ public class ExtendApplication extends Application {
             mAuth = FirebaseAuth.getInstance();
         }
         return mAuth;
+    }
+
+    public static void setApiKey(String apiKeyNew) {
+        apiKey = apiKeyNew;
+    }
+
+    public static String getApiKey() {
+        return apiKey;
     }
 
     @VisibleForTesting

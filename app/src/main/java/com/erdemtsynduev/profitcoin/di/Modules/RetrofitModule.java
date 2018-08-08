@@ -1,5 +1,6 @@
 package com.erdemtsynduev.profitcoin.di.Modules;
 
+import com.erdemtsynduev.profitcoin.BuildConfig;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
@@ -23,7 +24,7 @@ public class RetrofitModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofit(Retrofit.Builder builder) {
-        return builder.baseUrl("https://pro-api.coinmarketcap.com/").build();
+        return builder.baseUrl(BuildConfig.API_ENDPOINT).build();
     }
 
     @Provides

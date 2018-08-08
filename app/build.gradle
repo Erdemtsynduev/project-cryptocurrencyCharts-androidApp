@@ -17,6 +17,9 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_ENDPOINT", '"https://pro-api.coinmarketcap.com/"'
+        buildConfigField "String", "API_KEY", '"ADD YOUR API KEY"'
     }
 
     buildTypes {

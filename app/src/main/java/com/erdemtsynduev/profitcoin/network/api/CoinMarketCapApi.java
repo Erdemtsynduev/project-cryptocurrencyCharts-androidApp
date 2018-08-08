@@ -4,11 +4,10 @@ import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.ListAllC
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
+import retrofit2.http.Header;
 
 public interface CoinMarketCapApi {
 
-    @Headers("X-CMC_PRO_API_KEY: ADD YOUR KEY")
     @GET("v1/cryptocurrency/listings/latest")
-    Call<ListAllCryptocurrencies> getTicker();
+    Call<ListAllCryptocurrencies> getTicker(@Header("X-CMC_PRO_API_KEY") String apiKey);
 }
