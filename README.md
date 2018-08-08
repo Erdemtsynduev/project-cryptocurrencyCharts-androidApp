@@ -1,3 +1,5 @@
+![screen](../master/art/promo_logo.png)
+
 Project - "Profitcoin"
 =========================
 
