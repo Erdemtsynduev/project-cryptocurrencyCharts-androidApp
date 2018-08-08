@@ -33,17 +33,15 @@ Android Support Repository
 Getting Started
 ---------------
 
-These samples use the Gradle build system.
+## How to Work with the Source
+The app fetches cryptocurrency information using [Coin Market Cap](https://pro.coinmarketcap.com/api/v1) API.
+You have to enter your own API key into `build.gradle` file.
 
-First download the samples by cloning this repository or downloading an archived
-snapshot. (See the options at the top of the page.)
+```gradle.properties
+API_KEY="ADD YOUR API KEY"
+```
 
-In Android Studio, use the "Import non-Android Studio project" or 
-"Import Project" option. Next select one of the sample directories that you downloaded from this
-repository.
-If prompted for a gradle configuration accept the default settings. 
-
-Alternatively use the "gradlew build" command to build the project directly.
+If you don’t already have an account, you will need to create one in order to request an [API Key](https://www.themoviedb.org/documentation/api) .
 
 Support
 -------
