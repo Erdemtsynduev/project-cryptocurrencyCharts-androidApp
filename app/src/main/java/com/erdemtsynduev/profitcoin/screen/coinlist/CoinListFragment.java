@@ -2,11 +2,13 @@ package com.erdemtsynduev.profitcoin.screen.coinlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,11 @@ import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.screen.coindetail.CoinDetailActivity;
 import com.erdemtsynduev.profitcoin.screen.coinlist.adapter.CoinListAdapter;
+import com.erdemtsynduev.profitcoin.screen.search.SearchCoinActivity;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,6 +42,9 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
 
     @BindView(R.id.linearLayoutSorting)
     LinearLayout mLinearLayoutSorting;
+
+    @BindView(R.id.searchTitle)
+    SearchView mSearchTitle;
 
     private CoinListAdapter mCoinListAdapter;
 
@@ -80,6 +87,11 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
 
         mLinearLayoutSorting.setOnClickListener(v -> {
             showSortDialog();
+        });
+
+        mSearchTitle.setQueryHint("Search");
+        mSearchTitle.setOnClickListener(v -> {
+            mCoinListPresenter.openScreenSearch();
         });
     }
 
@@ -136,6 +148,13 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
     public void openScreenDetail(Datum datum) {
         Intent intent = new Intent(getContext(), CoinDetailActivity.class);
         intent.putExtra("datum", datum);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openScreenSearch(List<Datum> datumList) {
+        Intent intent = new Intent(getContext(), SearchCoinActivity.class);
+        intent.putParcelableArrayListExtra("datumList", (ArrayList<? extends Parcelable>) datumList);
         startActivity(intent);
     }
 }

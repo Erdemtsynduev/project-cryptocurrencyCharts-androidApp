@@ -12,4 +12,6 @@ public interface CoinListView extends MvpView {
     void showEmptyCoinList();
 
     void openScreenDetail(Datum datum);
+
+    void openScreenSearch(List<Datum> datumList);
 }

@@ -102,6 +102,12 @@ public class CoinListPresenter extends BasePresenter<CoinListView> implements Ba
         getViewState().openScreenDetail(datum);
     }
 
+    public void openScreenSearch() {
+        if (!datumListSaved.isEmpty()) {
+            getViewState().openScreenSearch(datumListSaved);
+        }
+    }
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();

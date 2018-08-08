@@ -31,6 +31,7 @@
         <activity android:name=".screen.signup.SignupActivity" />
         <activity android:name=".screen.login.LoginActivity" />
         <activity android:name=".screen.resetpassword.ResetPasswordActivity" />
+        <activity android:name=".screen.search.SearchCoinActivity" />
 
         <service android:name=".network.NetworkService" />
 
