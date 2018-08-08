@@ -1,9 +1,11 @@
 package com.erdemtsynduev.profitcoin.screen.home;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -23,11 +25,23 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
 
+    private FragmentManager fragmentManager;
+    private Fragment currentFragment;
+
+    private static final String TAG_FRAGMENT_PORTFOLIO = "fragment_portfolio";
+    private static final String TAG_FRAGMENT_CURRENCY = "fragment_currency";
+    private static final String TAG_FRAGMENT_SETTING = "fragment_settings";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
+        // instantiate the fragment manager
+        fragmentManager = getSupportFragmentManager();
+
+        showCurrencyListFragment();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
@@ -46,32 +60,43 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
                 });
 
         bottomNavigationView.setSelectedItemId(R.id.menu_list_currency);
-
-        showCurrencyListFragment();
     }
 
     @Override
     public void showPortfolioFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.contentFrame, PortfolioFragment.getInstance())
-                .commit();
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG_FRAGMENT_PORTFOLIO);
+        if (fragment == null) {
+            fragment = PortfolioFragment.getInstance();
+        }
+        replaceFragment(fragment, TAG_FRAGMENT_PORTFOLIO);
     }
 
     @Override
     public void showCurrencyListFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.contentFrame, CoinListFragment.getInstance())
-                .commit();
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG_FRAGMENT_CURRENCY);
+        if (fragment == null) {
+            fragment = CoinListFragment.getInstance();
+        }
+        replaceFragment(fragment, TAG_FRAGMENT_CURRENCY);
     }
 
     @Override
     public void showAccountFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.contentFrame, AccountFragment.getInstance())
-                .commit();
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG_FRAGMENT_SETTING);
+        if (fragment == null) {
+            fragment = AccountFragment.getInstance();
+        }
+        replaceFragment(fragment, TAG_FRAGMENT_SETTING);
+    }
+
+    private void replaceFragment(@NonNull Fragment fragment, @NonNull String tag) {
+        if (!fragment.equals(currentFragment)) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.contentFrame, fragment, tag)
+                    .commit();
+            currentFragment = fragment;
+        }
     }
 
     @Override

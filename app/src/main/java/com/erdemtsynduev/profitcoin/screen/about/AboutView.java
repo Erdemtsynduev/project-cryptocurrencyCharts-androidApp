@@ -1,4 +1,7 @@
 package com.erdemtsynduev.profitcoin.screen.about;
 
-public interface AboutView {
+import com.arellomobile.mvp.MvpView;
+
+public interface AboutView extends MvpView {
+
 }

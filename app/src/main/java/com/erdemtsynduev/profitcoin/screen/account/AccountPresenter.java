@@ -2,10 +2,25 @@ package com.erdemtsynduev.profitcoin.screen.account;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.erdemtsynduev.profitcoin.screen.settings.SettingsView;
 
 @InjectViewState
 public class AccountPresenter extends MvpPresenter<AccountView> {
+
+    public void openScreenLogin(){
+        getViewState().openScreenLogin();
+    }
+
+    public void openScreenSignin(){
+        getViewState().openScreenSignup();
+    }
+
+    public void openScreenAboutApp(){
+        getViewState().openScreenAboutApp();
+    }
+
+    public void openScreenHelp(){
+        getViewState().openScreenHelp();
+    }
 
     @Override
     protected void onFirstViewAttach() {

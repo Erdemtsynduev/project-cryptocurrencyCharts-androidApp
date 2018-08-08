@@ -7,7 +7,7 @@
     android:background="@color/colorPrimaryDark">
 
     <LinearLayout
-        android:id="@+id/frame_about_program"
+        android:id="@+id/frame_login"
         android:layout_width="match_parent"
         android:layout_height="39dp"
         android:layout_marginTop="24dp"
@@ -30,16 +30,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@string/text_setting_about_program"
+            android:text="@string/text_setting_login"
             android:textColor="@color/colorText"
             android:textSize="16sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/frame_about_program"
+        android:id="@+id/frame_signup"
         android:layout_width="match_parent"
         android:layout_height="39dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
@@ -47,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="243dp">
+        app:layout_constraintTop_toBottomOf="@+id/frame_login">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -59,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@string/text_setting_about_program"
+            android:text="@string/text_setting_singup"
             android:textColor="@color/colorText"
             android:textSize="16sp" />
 
@@ -69,14 +70,15 @@
         android:id="@+id/frame_about_program"
         android:layout_width="match_parent"
         android:layout_height="39dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="303dp">
+        app:layout_constraintTop_toBottomOf="@+id/frame_help">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -98,19 +100,18 @@
         android:id="@+id/image_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/text_setting_image_symbol_content"
         android:src="@drawable/ic_btc"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/frame_exit"
+        android:id="@+id/frame_add_api_key"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
@@ -118,19 +119,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="356dp">
+        app:layout_constraintTop_toBottomOf="@+id/frame_signup">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_exit_white" />
+            android:src="@drawable/ic_info_white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@string/text_setting_exit"
+            android:text="@string/text_setting_api_key"
+            android:textColor="@color/colorText"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frame_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_add_api_key">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_info_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/text_setting_help"
             android:textColor="@color/colorText"
             android:textSize="16sp" />
 

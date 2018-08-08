@@ -25,7 +25,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.paperdb.Paper;
 
 public class PortfolioFragment extends MvpAppCompatFragment implements PortfolioView {
 
@@ -65,7 +64,7 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
         mCoinListAdapter = new CoinListAdapter(getContext());
         mCoinListAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
 
-        toolbarTitle.setText("Profitcoin");
+        toolbarTitle.setText(getString(R.string.app_name));
 
         mCoinListAdapter.setOnItemClickListener((adapter, view1, position) -> {
             if ((adapter.getItem(position)) != null) {

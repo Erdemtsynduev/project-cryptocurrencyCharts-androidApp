@@ -15,11 +15,16 @@
 
     <string name="text_setting_image_symbol_content">Image symbol cryptocurrency</string>
     <string name="text_setting_about_program">About program</string>
+    <string name="text_setting_login">Login</string>
+    <string name="text_setting_singup">Sign up</string>
     <string name="text_setting_exit">Exit</string>
+    <string name="text_setting_help">Help</string>
+    <string name="text_setting_api_key">Add API KEY</string>
 
     <string name="refresh">Refresh</string>
     <string name="loading">Loading</string>
     <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="back">Back</string>
     <string name="commit">Commit</string>
     <string name="ok">OK</string>
@@ -27,4 +32,44 @@
     <string name="empty">Empty</string>
 
     <string name="profile_save">Save</string>
+
+    <string name="dialog_title_sort">Sort by:</string>
+    <string name="dialog_sort_name">Name</string>
+    <string name="dialog_sort_amount">Amount</string>
+    <string name="dialog_sort_change_for_the_day">Change for the day</string>
+    <string name="dialog_sort_change_for_the_seven_day">Change in 7 days</string>
+    <string name="dialog_sort_button_decrease">Decreasing</string>
+
+    <string name="text_help_description">What is it Altcoin? Altcoins are cryptocurrencies other than Bitcoin.
+        The majority of altcoins are forks of Bitcoin with small uninteresting changes.
+        This page categorises different ways altcoins have modified Bitcoin.</string>
+
+    <string name="action_sign_in_short">Register</string>
+    <string name="email">Email</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="send_password_reset_email">Send Password reset email</string>
+    <string name="remove_user">Remove user</string>
+    <string name="new_pass">New Password</string>
+    <string name="title_activity_profile">Firebase</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
+    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
 </resources>

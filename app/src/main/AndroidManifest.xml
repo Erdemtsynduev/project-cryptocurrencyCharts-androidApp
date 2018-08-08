@@ -26,6 +26,11 @@
         </activity>
         <activity android:name=".screen.settings.SettingsActivity" />
         <activity android:name=".screen.coindetail.CoinDetailActivity" />
+        <activity android:name=".screen.about.AboutActivity" />
+        <activity android:name=".screen.help.HelpActivity" />
+        <activity android:name=".screen.signup.SignupActivity" />
+        <activity android:name=".screen.login.LoginActivity" />
+        <activity android:name=".screen.resetpassword.ResetPasswordActivity" />
 
         <service android:name=".network.NetworkService" />
 
@@ -34,12 +39,6 @@
             android:authorities="com.erdemtsynduev.profitcoin"
             android:exported="false" />
 
-
-        <!-- We'll need to add two entries to our manifest for our collection view widget -->
-
-        <!-- 1. The broadcast receiver that refers to our widget. This needs the
-                intent-filter android.appwidget.action.APPWIDGET_UPDATE and the
-                meta-data for our XML widget configuration -->
         <receiver android:name=".widget.PortfolioWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -50,8 +49,6 @@
                 android:resource="@xml/widget_provider" />
         </receiver>
 
-        <!-- 2. The service that will send our collection data to our widget. It needs the
-                permission android.permission.BIND_REMOTEVIEWS -->
         <service
             android:name=".widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />

@@ -19,4 +19,26 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="BigMaterialButtonStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/big_material_button_text_size</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="button_filled_primary" parent="DefaultButtonStyle">
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:minWidth">0px</item>
+        <item name="android:minHeight">0px</item>
+        <item name="android:padding">@dimen/buttonsPadding</item>
+    </style>
+
+    <style name="DefaultButtonStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_confirm_background</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>

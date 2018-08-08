@@ -7,6 +7,7 @@ import android.support.annotation.VisibleForTesting;
 import com.erdemtsynduev.profitcoin.di.AppComponent;
 import com.erdemtsynduev.profitcoin.di.DaggerAppComponent;
 import com.erdemtsynduev.profitcoin.di.Modules.ContextModule;
+import com.google.firebase.auth.FirebaseAuth;
 
 import io.paperdb.Paper;
 import ru.arturvasilov.sqlite.core.SQLite;
@@ -15,6 +16,7 @@ public class ExtendApplication extends Application {
 
     private static AppComponent sAppComponent;
     private static boolean appIsFirstRun = false;
+    private static FirebaseAuth mAuth;
 
     @Override
     public void onCreate() {
@@ -40,6 +42,13 @@ public class ExtendApplication extends Application {
 
     public static void setIsFirstRun(boolean isFirstRun) {
         appIsFirstRun = isFirstRun;
+    }
+
+    public static FirebaseAuth getFirebaseAuth() {
+        if (mAuth == null) {
+            mAuth = FirebaseAuth.getInstance();
+        }
+        return mAuth;
     }
 
     @VisibleForTesting

@@ -54,7 +54,7 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
         List<FavoriteCoin> savedFavoriteCoin = SQLite.get().query(FavoriteTable.TABLE);
 
         List<Datum> datumList = new ArrayList<>();
-        if (savedFavoriteCoin != null && !savedFavoriteCoin.isEmpty()) {
+        if (!savedFavoriteCoin.isEmpty()) {
             for (int i = 0; i < dataList.size(); i++) {
                 for (int a = 0; a < savedFavoriteCoin.size(); a++) {
                     if (dataList.get(i).getName().equals(savedFavoriteCoin.get(a).getName())) {

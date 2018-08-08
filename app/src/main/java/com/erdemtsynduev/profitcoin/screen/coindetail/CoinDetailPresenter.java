@@ -18,7 +18,7 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
         SQLite.get().insert(FavoriteTable.TABLE, favoriteCoin);
         SQLite.get().notifyTableChanged(FavoriteTable.TABLE);
 
-        showAddFavotireSuccess();
+        showAddFavoriteSuccess();
     }
 
     public void deleteCoinInFavorite(String nameCoin) {
@@ -29,7 +29,7 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
         deleteFavoriteSuccess();
     }
 
-    public void showAddFavotireSuccess() {
+    public void showAddFavoriteSuccess() {
         getViewState().showAddFavoriteSuccess();
     }
 

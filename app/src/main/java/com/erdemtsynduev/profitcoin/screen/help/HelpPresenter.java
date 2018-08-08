@@ -1,4 +1,9 @@
 package com.erdemtsynduev.profitcoin.screen.help;
 
-public class HelpPresenter {
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
+
+@InjectViewState
+public class HelpPresenter extends MvpPresenter<HelpView> {
+
 }

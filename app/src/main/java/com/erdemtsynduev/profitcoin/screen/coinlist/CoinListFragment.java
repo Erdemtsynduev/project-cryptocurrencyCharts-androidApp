@@ -7,9 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -18,6 +20,9 @@ import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.screen.coindetail.CoinDetailActivity;
 import com.erdemtsynduev.profitcoin.screen.coinlist.adapter.CoinListAdapter;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.OnItemClickListener;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.List;
 
@@ -31,6 +36,9 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
 
     @BindView(R.id.recyclerView)
     RecyclerView mChartsListRecycler;
+
+    @BindView(R.id.linearLayoutSorting)
+    LinearLayout mLinearLayoutSorting;
 
     private CoinListAdapter mCoinListAdapter;
 
@@ -68,6 +76,30 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
         mChartsListRecycler.setAdapter(mCoinListAdapter);
 
         mCoinListPresenter.getData();
+
+        mLinearLayoutSorting.setOnClickListener(v -> {
+            showSortDialog();
+        });
+    }
+
+    private void showSortDialog() {
+        DialogPlus dialog = DialogPlus
+                .newDialog(getActivity())
+                .setContentHolder(new ViewHolder(R.layout.dialog_sort))
+                .setCancelable(false)
+                .setGravity(Gravity.BOTTOM)
+                .create();
+
+        LinearLayout closeDialog = (LinearLayout) dialog.findViewById(R.id.linearLayoutCloseDialog);
+        LinearLayout sortByName = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortName);
+
+        closeDialog.setOnClickListener(v -> dialog.dismiss());
+
+        sortByName.setOnClickListener(v -> {
+
+        });
+
+        dialog.show();
     }
 
     @Override
