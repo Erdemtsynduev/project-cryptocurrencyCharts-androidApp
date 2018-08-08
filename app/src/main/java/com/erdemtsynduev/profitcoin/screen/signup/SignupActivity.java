@@ -80,13 +80,13 @@ public class SignupActivity extends MvpAppCompatActivity implements SignupView {
             //create user
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(SignupActivity.this, task -> {
-                        Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, getString(R.string.activity_signup_create_user_with_email) + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
+                            Toast.makeText(SignupActivity.this, getString(R.string.activity_signup_authentication_failed) + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             finish();
@@ -109,16 +109,16 @@ public class SignupActivity extends MvpAppCompatActivity implements SignupView {
 
     @Override
     public void showErrorEnterEmail() {
-        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.activity_signup_error_email), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showErrorPassword() {
-        Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.activity_signup_error_password), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showErrorPasswordSmall() {
-        Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.activity_signup_error_password_less), Toast.LENGTH_SHORT).show();
     }
 }

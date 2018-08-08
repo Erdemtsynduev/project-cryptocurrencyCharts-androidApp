@@ -49,6 +49,8 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
     private CoinListAdapter mCoinListAdapter;
 
     private SelectTypeSort selectTypeSort;
+    private static final String INTENT_DATUM = "datum";
+    private static final String INTENT_DATUM_LIST = "datumList";
 
     public static CoinListFragment getInstance() {
         return new CoinListFragment();
@@ -89,7 +91,7 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
             showSortDialog();
         });
 
-        mSearchTitle.setQueryHint("Search");
+        mSearchTitle.setQueryHint(getString(R.string.search));
         mSearchTitle.setOnClickListener(v -> {
             mCoinListPresenter.openScreenSearch();
         });
@@ -147,14 +149,14 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
     @Override
     public void openScreenDetail(Datum datum) {
         Intent intent = new Intent(getContext(), CoinDetailActivity.class);
-        intent.putExtra("datum", datum);
+        intent.putExtra(INTENT_DATUM, datum);
         startActivity(intent);
     }
 
     @Override
     public void openScreenSearch(List<Datum> datumList) {
         Intent intent = new Intent(getContext(), SearchCoinActivity.class);
-        intent.putParcelableArrayListExtra("datumList", (ArrayList<? extends Parcelable>) datumList);
+        intent.putParcelableArrayListExtra(INTENT_DATUM_LIST, (ArrayList<? extends Parcelable>) datumList);
         startActivity(intent);
     }
 }

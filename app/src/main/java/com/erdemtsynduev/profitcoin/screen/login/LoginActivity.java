@@ -125,11 +125,11 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     public void showErrorEnterEmail() {
-        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.activity_Login_error_email), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showErrorPassword() {
-        Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.activity_Login_error_password), Toast.LENGTH_SHORT).show();
     }
 }

@@ -30,8 +30,22 @@
     <string name="ok">OK</string>
     <string name="error">Error</string>
     <string name="empty">Empty</string>
+    <string name="search">Search</string>
 
     <string name="profile_save">Save</string>
+
+    <string name="dialog_exit_description">Do you really want to quit?</string>
+    <string name="dialog_exit_positive">Yes</string>
+    <string name="dialog_exit_negative">Cancel</string>
+
+    <string name="activity_Login_error_email">Enter email address!</string>
+    <string name="activity_Login_error_password">Enter password!</string>
+
+    <string name="activity_signup_create_user_with_email">createUserWithEmail:onComplete:"</string>
+    <string name="activity_signup_authentication_failed">Authentication failed.</string>
+    <string name="activity_signup_error_email">Enter email address!</string>
+    <string name="activity_signup_error_password">Enter password!</string>
+    <string name="activity_signup_error_password_less">Password too short, enter minimum 6 characters!</string>
 
     <string name="dialog_title_sort">Sort by:</string>
     <string name="dialog_sort_name">Name</string>

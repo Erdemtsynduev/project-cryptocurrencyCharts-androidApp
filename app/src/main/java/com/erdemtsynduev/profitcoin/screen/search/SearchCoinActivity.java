@@ -69,7 +69,7 @@ public class SearchCoinActivity extends MvpAppCompatActivity implements SearchCo
     private void setupSearchView() {
         toolbarSearch.setIconifiedByDefault(false);
         toolbarSearch.setSubmitButtonEnabled(true);
-        toolbarSearch.setQueryHint("Search Here");
+        toolbarSearch.setQueryHint(getString(R.string.search));
 
         toolbarSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

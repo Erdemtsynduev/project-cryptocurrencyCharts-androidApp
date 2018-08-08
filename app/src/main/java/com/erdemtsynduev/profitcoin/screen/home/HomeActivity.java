@@ -103,13 +103,13 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
     public void showDialogExit() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
-                .setTitle("PROFITCOIN")
-                .setMessage("Do you really want to quit?")
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.dialog_exit_description))
                 .setCancelable(false)
-                .setPositiveButton("YES", (dialog, which) -> {
-                    closeAppliction();
+                .setPositiveButton(getString(R.string.dialog_exit_positive), (dialog, which) -> {
+                    closeApp();
                 })
-                .setNegativeButton("CANCEL", (dialog, which) -> {
+                .setNegativeButton(getString(R.string.dialog_exit_negative), (dialog, which) -> {
                     dialog.cancel();
                 });
 
@@ -122,7 +122,7 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
         mHomePresenter.showDialogExit();
     }
 
-    private void closeAppliction() {
+    private void closeApp() {
         finishAffinity();
         System.exit(0);
     }
