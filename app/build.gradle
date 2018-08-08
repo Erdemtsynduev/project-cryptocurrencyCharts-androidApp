@@ -48,6 +48,8 @@ dependencies {
     implementation deps.otto
     implementation deps.baseRecyclerViewAdapterHelper
     implementation deps.paperdb
+    implementation deps.dialogplus
+    implementation deps.sdpAndroid
 
     implementation deps.firebase.core
     implementation deps.firebase.auth

@@ -40,6 +40,8 @@ buildscript {
             'baseRecyclerViewAdapterHelper': 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40',
             'sqliteWrapper'                : 'ru.arturvasilov:sqlite:0.2.0',
             'paperdb'                      : 'io.paperdb:paperdb:2.6',
+            'dialogplus'                   : 'com.orhanobut:dialogplus:1.11@aar',
+            'sdpAndroid'                   : 'com.intuit.sdp:sdp-android:1.0.4',
             'rx'                           : [
                     'core'   : 'io.reactivex.rxjava2:rxjava:2.1.17',
                     'android': 'io.reactivex.rxjava2:rxandroid:2.0.2',
