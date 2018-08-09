@@ -50,9 +50,10 @@ dependencies {
     implementation deps.picasso
     implementation deps.otto
     implementation deps.baseRecyclerViewAdapterHelper
-    implementation deps.paperdb
     implementation deps.dialogplus
-    implementation deps.sdpAndroid
+
+    implementation deps.room.runtime
+    annotationProcessor deps.room.compiler
 
     implementation deps.firebase.core
     implementation deps.firebase.auth
@@ -63,8 +64,6 @@ dependencies {
 
     implementation deps.rx.core
     implementation deps.rx.android
-
-    implementation deps.sqliteWrapper
 
     implementation deps.butterknife.core
     annotationProcessor deps.butterknife.compiler
