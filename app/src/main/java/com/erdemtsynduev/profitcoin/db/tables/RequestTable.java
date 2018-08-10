@@ -1,53 +1,63 @@
 package com.erdemtsynduev.profitcoin.db.tables;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.content.ContentValues;
-import android.database.Cursor;
 
+import com.erdemtsynduev.profitcoin.db.converter.RequestStatusConverter;
 import com.erdemtsynduev.profitcoin.network.model.request.NetworkRequest;
 import com.erdemtsynduev.profitcoin.network.model.request.Request;
 import com.erdemtsynduev.profitcoin.network.model.request.RequestStatus;
 
-import org.sqlite.database.sqlite.SQLiteDatabase;
+@Entity(tableName = RequestTable.TABLE_NAME)
+public class RequestTable {
 
-import io.reactivex.annotations.NonNull;
-import ru.arturvasilov.sqlite.core.BaseTable;
-import ru.arturvasilov.sqlite.core.Table;
-import ru.arturvasilov.sqlite.utils.TableBuilder;
+    /**
+     * The name of the Request table.
+     */
+    public static final String TABLE_NAME = "request_table";
 
-public class RequestTable extends BaseTable<Request> {
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_REQUEST = "request";
+    public static final String COLUMN_STATUS = "status";
+    public static final String COLUMN_ERROR = "error";
 
-    public static final Table<Request> TABLE = new RequestTable();
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(index = true, name = COLUMN_ID)
+    private String id;
 
-    public static final String REQUEST = "request";
-    public static final String STATUS = "status";
-    public static final String ERROR = "error";
+    @ColumnInfo(name = COLUMN_REQUEST)
+    private String request;
 
-    @Override
-    public void onCreate(@NonNull SQLiteDatabase database) {
-        TableBuilder.create(this)
-                .textColumn(REQUEST)
-                .textColumn(STATUS)
-                .textColumn(ERROR)
-                .primaryKey(REQUEST)
-                .execute(database);
-    }
+    @TypeConverters({RequestStatusConverter.class})
+    @ColumnInfo(name = COLUMN_STATUS)
+    private RequestStatus status;
 
-    @NonNull
-    @Override
-    public ContentValues toValues(@NonNull Request request) {
-        ContentValues values = new ContentValues();
-        values.put(REQUEST, request.getRequest());
-        values.put(STATUS, request.getStatus().name());
-        values.put(ERROR, request.getError());
-        return values;
-    }
+    @ColumnInfo(name = COLUMN_ERROR)
+    private String error;
 
-    @NonNull
-    @Override
-    public Request fromCursor(@NonNull Cursor cursor) {
-        @NetworkRequest String request = cursor.getString(cursor.getColumnIndex(REQUEST));
-        RequestStatus status = RequestStatus.valueOf(cursor.getString(cursor.getColumnIndex(STATUS)));
-        String error = cursor.getString(cursor.getColumnIndex(ERROR));
+    /**
+     * Create a new {@link Request} from the specified {@link ContentValues}.
+     *
+     * @param values A {@link ContentValues} that at least contain {@link #COLUMN_REQUEST}.
+     * @return A newly created {@link Request} instance.
+     */
+    public static Request fromContentValues(ContentValues values) {
+        @NetworkRequest String request = null;
+        RequestStatus status = null;
+        String error = null;
+
+        if (values.containsKey(COLUMN_REQUEST)) {
+            request = values.getAsString(COLUMN_REQUEST);
+        }
+        if (values.containsKey(COLUMN_STATUS)) {
+            status = RequestStatus.valueOf(values.getAsString(COLUMN_STATUS));
+        }
+        if (values.containsKey(COLUMN_ERROR)) {
+            error = values.getAsString(COLUMN_ERROR);
+        }
         return new Request(request, status, error);
     }
 }
