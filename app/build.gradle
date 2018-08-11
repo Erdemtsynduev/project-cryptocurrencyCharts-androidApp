@@ -51,6 +51,7 @@ dependencies {
     implementation deps.otto
     implementation deps.baseRecyclerViewAdapterHelper
     implementation deps.dialogplus
+    implementation deps.paperdb
 
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
