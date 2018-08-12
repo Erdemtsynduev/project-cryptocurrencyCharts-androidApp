@@ -41,4 +41,17 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="empty_img">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>
