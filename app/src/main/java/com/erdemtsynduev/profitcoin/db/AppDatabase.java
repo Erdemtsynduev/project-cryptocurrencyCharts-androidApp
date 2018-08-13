@@ -1,4 +1,4 @@
-package com.erdemtsynduev.profitcoin.db.sqllite;
+package com.erdemtsynduev.profitcoin.db;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -15,7 +15,7 @@ import com.erdemtsynduev.profitcoin.db.tables.RequestTableDao;
 /**
  * The Room database.
  */
-@Database(entities = {CoinTable.class, FavoriteTable.class, RequestTable.class}, version = 1)
+@Database(entities = {CoinTable.class, FavoriteTable.class, RequestTable.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**

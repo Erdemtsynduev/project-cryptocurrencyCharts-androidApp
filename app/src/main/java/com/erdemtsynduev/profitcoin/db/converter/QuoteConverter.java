@@ -2,7 +2,7 @@ package com.erdemtsynduev.profitcoin.db.converter;
 
 import android.arch.persistence.room.TypeConverter;
 
-import com.erdemtsynduev.profitcoin.db.GsonHolder;
+import com.erdemtsynduev.profitcoin.db.utils.GsonHolder;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Quote;
 
 public class QuoteConverter {

@@ -1,4 +1,4 @@
-package com.erdemtsynduev.profitcoin.db;
+package com.erdemtsynduev.profitcoin.db.utils;
 
 import com.google.gson.Gson;
 
