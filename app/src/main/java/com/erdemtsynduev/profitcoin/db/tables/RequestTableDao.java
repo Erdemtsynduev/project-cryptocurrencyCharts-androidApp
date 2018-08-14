@@ -3,6 +3,7 @@ package com.erdemtsynduev.profitcoin.db.tables;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.database.Cursor;
@@ -16,21 +17,21 @@ import com.erdemtsynduev.profitcoin.network.model.request.Request;
 public interface RequestTableDao {
 
     /**
-     * Select a request by the ID.
-     *
-     * @param requestId The row ID.
-     * @return A {@link Cursor} of the selected request.
-     */
-    @Query("SELECT * FROM " + RequestTable.TABLE_NAME + " WHERE " + RequestTable.COLUMN_ID + " = :requestId")
-    Cursor selectById(long requestId);
-
-    /**
      * Select all request.
      *
      * @return A {@link Cursor} of all the request in the table.
      */
     @Query("SELECT * FROM " + RequestTable.TABLE_NAME)
     Cursor selectAll();
+
+    /**
+     * Select a request by the ID.
+     *
+     * @param requestId The row ID.
+     * @return A {@link Cursor} of the selected request
+     */
+    @Query("SELECT * FROM " + RequestTable.TABLE_NAME + " WHERE " + RequestTable.COLUMN_ID + " = :requestId")
+    Cursor selectById(long requestId);
 
     /**
      * Select a request by the nameRequest.
@@ -53,29 +54,29 @@ public interface RequestTableDao {
     /**
      * Inserts a request into the table.
      *
-     * @param request A new request.
+     * @param requestTable A new request.
      * @return The row ID of the newly inserted request.
      */
-    @Insert
-    long insert(Request request);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(RequestTable requestTable);
 
     /**
      * Inserts multiple request into the database
      *
-     * @param request An array of new request.
+     * @param requestTables An array of new request.
      * @return The row IDs of the newly inserted request.
      */
     @Insert
-    long[] insertAll(Request[] request);
+    long[] insertAll(RequestTable[] requestTables);
 
     /**
      * Delete a request.
      *
-     * @param request The request.
+     * @param requestTable The request.
      * @return A number of request deleted. This should always be {@code 1}.
      */
     @Delete
-    int delete(Request request);
+    int delete(RequestTable requestTable);
 
     /**
      * Delete a request by the name.
@@ -99,9 +100,9 @@ public interface RequestTableDao {
     /**
      * Update the request. The cheese is identified by the row ID.
      *
-     * @param request The request to update.
+     * @param requestTable The request to update.
      * @return A number of request updated. This should always be {@code 1}.
      */
     @Update
-    int update(Request request);
+    int update(RequestTable requestTable);
 }

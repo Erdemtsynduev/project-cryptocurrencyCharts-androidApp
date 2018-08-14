@@ -3,6 +3,7 @@ package com.erdemtsynduev.profitcoin.db.tables;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.database.Cursor;
@@ -53,29 +54,29 @@ public interface CoinTableDao {
     /**
      * Inserts a altcoin into the table.
      *
-     * @param datum A new Datum.
+     * @param coinTable A new CoinTable.
      * @return The row ID of the newly inserted altcoin in table.
      */
-    @Insert
-    long insert(Datum datum);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(CoinTable coinTable);
 
     /**
      * Inserts multiple altcoin into the database
      *
-     * @param datum An array of new altcoin.
+     * @param coinTable An array of new altcoin.
      * @return The row IDs of the newly inserted altcoin.
      */
-    @Insert
-    long[] insertAll(Datum[] datum);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAll(CoinTable[] coinTable);
 
     /**
      * Delete a altcoin.
      *
-     * @param datum The data with altcoin.
+     * @param coinTable The data with altcoin.
      * @return A number of altcoin deleted. This should always be {@code 1}.
      */
     @Delete
-    int delete(Datum datum);
+    int delete(CoinTable coinTable);
 
     /**
      * Delete a altcoin by the name.
@@ -99,9 +100,9 @@ public interface CoinTableDao {
     /**
      * Update the datum. The cheese is identified by the row ID.
      *
-     * @param datum The altcoin to update.
+     * @param coinTable The altcoin to update.
      * @return A number of datum updated. This should always be {@code 1}.
      */
     @Update
-    int update(Datum datum);
+    int update(CoinTable coinTable);
 }

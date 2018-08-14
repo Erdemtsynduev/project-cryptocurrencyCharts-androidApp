@@ -3,6 +3,7 @@ package com.erdemtsynduev.profitcoin.db.tables;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.database.Cursor;
@@ -53,29 +54,29 @@ public interface FavoriteTableDao {
     /**
      * Inserts a FavoriteCoin into the table.
      *
-     * @param favoriteCoin A new favorite altcoin.
+     * @param favoriteTable A new favorite altcoin.
      * @return The row ID of the newly inserted favoriteCoin.
      */
-    @Insert
-    long insert(FavoriteCoin favoriteCoin);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(FavoriteTable favoriteTable);
 
     /**
      * Inserts multiple FavoriteCoin into the database
      *
-     * @param favoriteCoin An array of new favorite altcoin.
+     * @param favoriteTables An array of new favorite altcoin.
      * @return The row IDs of the newly inserted FavoriteCoin.
      */
-    @Insert
-    long[] insertAll(FavoriteCoin[] favoriteCoin);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAll(FavoriteTable[] favoriteTables);
 
     /**
      * Delete a FavoriteCoin.
      *
-     * @param favoriteCoin The favoriteCoin.
+     * @param favoriteTable The favoriteCoin.
      * @return A number of favoriteCoin deleted. This should always be {@code 1}.
      */
     @Delete
-    int delete(FavoriteCoin favoriteCoin);
+    int delete(FavoriteTable favoriteTable);
 
     /**
      * Delete a favoriteCoin by the name.
@@ -99,9 +100,9 @@ public interface FavoriteTableDao {
     /**
      * Update the favoriteCoin. The cheese is identified by the row ID.
      *
-     * @param favoriteCoin The FavoriteCoin to update.
+     * @param favoriteTable The FavoriteCoin to update.
      * @return A number of favoriteCoin updated. This should always be {@code 1}.
      */
     @Update
-    int update(FavoriteCoin favoriteCoin);
+    int update(FavoriteTable favoriteTable);
 }
