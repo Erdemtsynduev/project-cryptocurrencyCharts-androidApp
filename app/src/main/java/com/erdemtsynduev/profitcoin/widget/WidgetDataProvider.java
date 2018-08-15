@@ -45,7 +45,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public int getCount() {
-        return mDatumList.size();
+        return (mDatumList != null) ? mDatumList.size() : 0;
     }
 
     @Override
@@ -54,22 +54,34 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
                 R.layout.list_widget_item);
 
         if (mDatumList != null && !mDatumList.isEmpty()) {
-            view.setTextViewText(R.id.widget_text_symbol_currency, mDatumList.get(position).getSymbol());
-            view.setTextViewText(R.id.widget_text_name_currency, mDatumList.get(position).getName());
+            if (mDatumList.get(position).getSymbol() != null && !mDatumList.get(position).getSymbol().isEmpty()) {
+                view.setTextViewText(R.id.widget_text_symbol_currency, mDatumList.get(position).getSymbol());
+            }
+            if (mDatumList.get(position).getName() != null && !mDatumList.get(position).getName().isEmpty()) {
+                view.setTextViewText(R.id.widget_text_name_currency, mDatumList.get(position).getName());
+            }
+
             if (mDatumList.get(position).getQuote().getUSD().getPercentChange24h() != null &&
-                    mDatumList.get(position).getQuote().getUSD().getPercentChange24h().contains("-")) {
-                view.setTextColor(R.id.widget_text_hours, mContext.getResources().getColor(R.color.colorNegative));
-            } else {
-                view.setTextColor(R.id.widget_text_hours, mContext.getResources().getColor(R.color.colorPositive));
+                    !mDatumList.get(position).getQuote().getUSD().getPercentChange24h().isEmpty()) {
+                view.setTextViewText(R.id.widget_text_hours, mDatumList.get(position).getQuote().getUSD().getPercentChange24h());
+
+                if (mDatumList.get(position).getQuote().getUSD().getPercentChange24h().contains("-")) {
+                    view.setTextColor(R.id.widget_text_hours, mContext.getResources().getColor(R.color.colorNegative));
+                } else {
+                    view.setTextColor(R.id.widget_text_hours, mContext.getResources().getColor(R.color.colorPositive));
+                }
             }
+
             if (mDatumList.get(position).getQuote().getUSD().getPercentChange7d() != null &&
-                    mDatumList.get(position).getQuote().getUSD().getPercentChange7d().contains("-")) {
-                view.setTextColor(R.id.widget_text_days, mContext.getResources().getColor(R.color.colorNegative));
-            } else {
-                view.setTextColor(R.id.widget_text_days, mContext.getResources().getColor(R.color.colorPositive));
+                    !mDatumList.get(position).getQuote().getUSD().getPercentChange7d().isEmpty()) {
+                view.setTextViewText(R.id.widget_text_days, mDatumList.get(position).getQuote().getUSD().getPercentChange7d());
+
+                if (mDatumList.get(position).getQuote().getUSD().getPercentChange7d().contains("-")) {
+                    view.setTextColor(R.id.widget_text_days, mContext.getResources().getColor(R.color.colorNegative));
+                } else {
+                    view.setTextColor(R.id.widget_text_days, mContext.getResources().getColor(R.color.colorPositive));
+                }
             }
-            view.setTextViewText(R.id.widget_text_hours, mDatumList.get(position).getQuote().getUSD().getPercentChange24h());
-            view.setTextViewText(R.id.widget_text_days, mDatumList.get(position).getQuote().getUSD().getPercentChange7d());
         }
 
         return view;
