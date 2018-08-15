@@ -45,7 +45,8 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_margin="@dimen/widget_margin"
-            android:background="@drawable/ic_dot_white" />
+            android:background="@drawable/ic_dot_white"
+            android:contentDescription="@string/ic_dot" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,7 +73,8 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_margin="@dimen/widget_margin"
-            android:background="@drawable/ic_dot_white" />
+            android:background="@drawable/ic_dot_white"
+            android:contentDescription="@string/ic_dot" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,7 +101,8 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_margin="@dimen/widget_margin"
-            android:background="@drawable/ic_dot_white" />
+            android:background="@drawable/ic_dot_white"
+            android:contentDescription="@string/ic_dot" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -126,7 +129,8 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_margin="@dimen/widget_margin"
-            android:background="@drawable/ic_dot_white" />
+            android:background="@drawable/ic_dot_white"
+            android:contentDescription="@string/ic_dot" />
 
         <TextView
             android:layout_width="wrap_content"

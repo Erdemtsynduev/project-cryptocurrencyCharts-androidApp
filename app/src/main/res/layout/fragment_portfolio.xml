@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Saved your cryptocurrency"
+            android:text="@string/saved_your_cryptocurrency"
             android:textColor="@color/colorText"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewPortfolio"

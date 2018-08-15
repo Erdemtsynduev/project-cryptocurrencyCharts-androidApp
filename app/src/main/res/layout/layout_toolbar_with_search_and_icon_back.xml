@@ -21,7 +21,8 @@
                 android:id="@+id/img_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_arrow_back" />
+                android:background="@drawable/ic_arrow_back"
+                android:contentDescription="@string/ic_search" />
 
             <android.support.v7.widget.SearchView
                 android:id="@+id/searchTitle"

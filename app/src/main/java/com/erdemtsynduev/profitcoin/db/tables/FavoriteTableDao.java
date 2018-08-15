@@ -8,8 +8,6 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.database.Cursor;
 
-import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
-
 /**
  * Data access object for FavoriteTable.
  */

@@ -6,6 +6,7 @@
 
     <ImageView
         style="@style/empty_img"
+        android:contentDescription="@string/ic_warning"
         android:src="@drawable/ic_alert" />
 
     <TextView

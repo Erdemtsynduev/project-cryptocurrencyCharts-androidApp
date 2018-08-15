@@ -33,6 +33,7 @@
     <string name="search">Search</string>
 
     <string name="profile_save">Save</string>
+    <string name="profile_saved">Saved</string>
 
     <string name="dialog_exit_description">Do you really want to quit?</string>
     <string name="dialog_exit_positive">Yes</string>
@@ -88,4 +89,16 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
 
     <string name="empty_no_data">There is no data, Click Retry</string>
+
+    <string name="ic_info">Icon info</string>
+    <string name="ic_dot">Icon dot</string>
+    <string name="ic_search">Icon search</string>
+    <string name="ic_warning">Icon warning</string>
+    <string name="widget_header">Widget Header</string>
+    <string name="version_1_0_0">Version 1.0.0</string>
+    <string name="tittle_coindatail">Tittle</string>
+    <string name="price_dollar_coindetail">Price Dollar</string>
+    <string name="price_dollar_content_coindeatail">Price Dollar Content</string>
+    <string name="saved_your_cryptocurrency">Saved your cryptocurrency</string>
+    <string name="sorting">Sorting</string>
 </resources>

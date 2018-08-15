@@ -96,14 +96,14 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
 
     @Override
     public void showAddFavoriteSuccess() {
-        toolbarAction2.setText("Saved");
+        toolbarAction2.setText(getString(R.string.profile_saved));
         toolbarAction2.setTextColor(getResources().getColor(R.color.colorPositive));
         isFavorite = true;
     }
 
     @Override
     public void deleteFavoriteSuccess() {
-        toolbarAction2.setText("Save");
+        toolbarAction2.setText(getString(R.string.profile_save));
         toolbarAction2.setTextColor(getResources().getColor(R.color.colorText));
         isFavorite = false;
     }
@@ -121,10 +121,8 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader loader = new CursorLoader(
-                this, Uri.parse(CoinContentProvider.URI_FAVORITE_TABLE + "/" + args.getString("id")),
+        return new CursorLoader(this, Uri.parse(CoinContentProvider.URI_FAVORITE_TABLE + "/" + args.getString("id")),
                 null, null, null, null);
-        return loader;
     }
 
     @Override

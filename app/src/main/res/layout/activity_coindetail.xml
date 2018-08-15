@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Tittle"
+            android:text="@string/tittle_coindatail"
             android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Price Dollar"
+            android:text="@string/price_dollar_coindetail"
             android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="@+id/txt_title_detail"
             app:layout_constraintTop_toBottomOf="@+id/txt_title_detail" />
@@ -45,22 +45,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="TextView"
+            android:text="@string/price_dollar_content_coindeatail"
             android:textColor="@color/colorText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.875"
             app:layout_constraintStart_toEndOf="@+id/txt_price_dollar"
             app:layout_constraintTop_toTopOf="@+id/txt_price_dollar" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textColor="@color/colorText"
-            app:layout_constraintStart_toStartOf="@+id/txt_price_dollar"
-            app:layout_constraintTop_toBottomOf="@+id/txt_price_dollar" />
 
     </android.support.constraint.ConstraintLayout>
 

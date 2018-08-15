@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/text_setting_image_symbol_content"
             android:src="@drawable/ic_info_white" />
 
         <TextView
@@ -54,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/ic_info"
             android:src="@drawable/ic_info_white" />
 
         <TextView
@@ -84,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/ic_info"
             android:src="@drawable/ic_info_white" />
 
         <TextView
@@ -125,6 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/ic_info"
             android:src="@drawable/ic_info_white" />
 
         <TextView
@@ -155,6 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/ic_info"
             android:src="@drawable/ic_info_white" />
 
         <TextView
