@@ -1,21 +1,27 @@
 package com.erdemtsynduev.profitcoin.screen.coindetail;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.erdemtsynduev.profitcoin.R;
+import com.erdemtsynduev.profitcoin.db.provider.CoinContentProvider;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTable;
 import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.arturvasilov.sqlite.core.SQLite;
-import ru.arturvasilov.sqlite.core.Where;
 
-public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDetailView {
+public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDetailView,
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     @InjectPresenter
     CoinDetailPresenter mCoinDetailPresenter;
@@ -36,6 +42,7 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
     TextView toolbarAction2;
 
     private boolean isFavorite;
+    private static final int LOADER_ID = 0x02;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +67,14 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
                 onBackPressed();
             });
 
-            getFavorite(datum.getName());
+            Bundle bundle = new Bundle();
+            bundle.putString("id", datum.getId());
+            getFavorite(bundle);
 
             Datum finalDatum = datum;
             toolbarAction2.setOnClickListener(v -> {
                 if (isFavorite) {
-                    mCoinDetailPresenter.deleteCoinInFavorite(finalDatum.getName());
+                    mCoinDetailPresenter.deleteCoinInFavorite(finalDatum.getId());
                 } else {
                     mCoinDetailPresenter.saveCoinInFavorite(finalDatum.getId(), finalDatum.getName());
                 }
@@ -73,11 +82,8 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
         }
     }
 
-    private void getFavorite(String whereString) {
-        FavoriteCoin savedFavoriteCoin = SQLite.get().querySingle(FavoriteTable.TABLE,
-                Where.create().equalTo(FavoriteTable.COIN_NAME_FAVORITE, whereString));
-
-        setFavoriteCoin(savedFavoriteCoin);
+    private void getFavorite(Bundle bundle) {
+        getSupportLoaderManager().initLoader(LOADER_ID, bundle, this);
     }
 
     private void setFavoriteCoin(FavoriteCoin favoriteCoin) {
@@ -109,6 +115,35 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
 
     @Override
     public void showChartsDetail() {
+
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader loader = new CursorLoader(
+                this, Uri.parse(CoinContentProvider.URI_FAVORITE_TABLE + "/" + args.getString("id")),
+                null, null, null, null);
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        FavoriteCoin savedFavoriteCoin = null;
+        if (data != null && data.getCount() != 0) {
+            while (data.moveToNext()) {
+                FavoriteCoin favoriteCoin = new FavoriteCoin();
+                favoriteCoin.setId(data.getString(data.getColumnIndex(FavoriteTable.COLUMN_ID_FAVORITE)));
+                favoriteCoin.setName(data.getString(data.getColumnIndex(FavoriteTable.COLUMN_NAME_FAVORITE)));
+                savedFavoriteCoin = favoriteCoin;
+            }
+            data.close();
+        }
+        setFavoriteCoin(savedFavoriteCoin);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
 
     }
 }

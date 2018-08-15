@@ -39,6 +39,8 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
 
     private CoinListAdapter mCoinListAdapter;
 
+    private View emptyView;
+
     public static PortfolioFragment getInstance() {
         return new PortfolioFragment();
     }
@@ -72,6 +74,9 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
             }
         });
 
+        emptyView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) mPortfolioListRecycler.getParent(), false);
+        emptyView.setOnClickListener(v -> mPortfolioPresenter.getData());
+
         mPortfolioListRecycler.setAdapter(mCoinListAdapter);
 
         mPortfolioPresenter.getData();
@@ -85,7 +90,7 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
 
     @Override
     public void showEmptyPortfolioList() {
-
+        mCoinListAdapter.setEmptyView(emptyView);
     }
 
     @Override

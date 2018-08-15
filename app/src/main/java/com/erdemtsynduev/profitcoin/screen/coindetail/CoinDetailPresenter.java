@@ -1,12 +1,13 @@
 package com.erdemtsynduev.profitcoin.screen.coindetail;
 
+import android.net.Uri;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.erdemtsynduev.profitcoin.ExtendApplication;
+import com.erdemtsynduev.profitcoin.db.provider.CoinContentProvider;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTable;
 import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
-
-import ru.arturvasilov.sqlite.core.SQLite;
-import ru.arturvasilov.sqlite.core.Where;
 
 @InjectViewState
 public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
@@ -15,16 +16,16 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
         FavoriteCoin favoriteCoin = new FavoriteCoin();
         favoriteCoin.setId(id);
         favoriteCoin.setName(name);
-        SQLite.get().insert(FavoriteTable.TABLE, favoriteCoin);
-        SQLite.get().notifyTableChanged(FavoriteTable.TABLE);
+
+        ExtendApplication.getAppComponent().getContext().getContentResolver().
+                insert(CoinContentProvider.URI_FAVORITE_TABLE, FavoriteTable.toContentValues(favoriteCoin));
 
         showAddFavoriteSuccess();
     }
 
-    public void deleteCoinInFavorite(String nameCoin) {
-        Where where = Where.create().equalTo(FavoriteTable.COIN_NAME_FAVORITE, nameCoin);
-        SQLite.get().delete(FavoriteTable.TABLE, where);
-        SQLite.get().notifyTableChanged(FavoriteTable.TABLE);
+    public void deleteCoinInFavorite(String idCoin) {
+        ExtendApplication.getAppComponent().getContext().getContentResolver().
+                delete(Uri.parse(CoinContentProvider.URI_FAVORITE_TABLE + "/" + idCoin), null, null);
 
         deleteFavoriteSuccess();
     }
