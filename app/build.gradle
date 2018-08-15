@@ -5,6 +5,10 @@ def versionBuild = 0
 
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion versions.compileSdk
 
@@ -22,12 +26,22 @@ android {
         buildConfigField "String", "API_KEY", '"ADD YOUR API KEY"'
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             javaCompileOptions.annotationProcessorOptions.arguments['butterknife.debuggable'] = 'false'
+            signingConfig signingConfigs.release
         }
     }
 
