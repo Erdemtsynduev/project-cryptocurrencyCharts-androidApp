@@ -55,6 +55,11 @@
     <string name="dialog_sort_change_for_the_seven_day">Change in 7 days</string>
     <string name="dialog_sort_button_decrease">Decreasing</string>
 
+    <string name="dialog_title_add_api_key">Please add api key:</string>
+    <string name="dialog_add_api_key_close">Close</string>
+    <string name="dialog_add_api_key_accept">Add</string>
+    <string name="dialog_add_api_key_hint">Add your api key for work network</string>
+
     <string name="text_help_description">What is it Altcoin? Altcoins are cryptocurrencies other than Bitcoin.
         The majority of altcoins are forks of Bitcoin with small uninteresting changes.
         This page categorises different ways altcoins have modified Bitcoin.</string>

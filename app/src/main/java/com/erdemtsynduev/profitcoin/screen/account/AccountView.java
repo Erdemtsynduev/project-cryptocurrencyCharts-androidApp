@@ -12,6 +12,8 @@ public interface AccountView extends MvpView {
 
     void openScreenAboutApp();
 
+    void openDialogAddApiKey();
+
     void showEmptyLogIn();
 
     void showLogIn();

@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.erdemtsynduev.profitcoin.ExtendApplication;
 import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.screen.about.AboutActivity;
 import com.erdemtsynduev.profitcoin.screen.help.HelpActivity;
 import com.erdemtsynduev.profitcoin.screen.login.LoginActivity;
 import com.erdemtsynduev.profitcoin.screen.signup.SignupActivity;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +42,12 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
 
     @BindView(R.id.frame_signup)
     LinearLayout mLinearLayoutSignUp;
+
+    @BindView(R.id.frame_add_api_key)
+    LinearLayout mLinearLayoutAddApiKey;
+
+    @BindView(R.id.frame_exit)
+    LinearLayout mLinearLayoutExit;
 
     public static AccountFragment getInstance() {
         return new AccountFragment();
@@ -69,6 +81,14 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
         mLinearLayoutSignUp.setOnClickListener(v -> {
             mAccountPresenter.openScreenSignin();
         });
+
+        mLinearLayoutAddApiKey.setOnClickListener(v -> {
+            mAccountPresenter.openDialogAddApiKey();
+        });
+
+        mLinearLayoutExit.setOnClickListener(v -> {
+            mAccountPresenter.exitAccount();
+        });
     }
 
     @Override
@@ -96,12 +116,39 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
     }
 
     @Override
-    public void showEmptyLogIn() {
+    public void openDialogAddApiKey() {
+        DialogPlus dialog = DialogPlus
+                .newDialog(getActivity())
+                .setContentHolder(new ViewHolder(R.layout.dialog_add_api_key))
+                .setCancelable(false)
+                .setGravity(Gravity.BOTTOM)
+                .create();
 
+        EditText editTextApiKey = (EditText) dialog.findViewById(R.id.editText);
+        Button btnAccept = (Button) dialog.findViewById(R.id.btn_accept);
+        Button btnClose = (Button) dialog.findViewById(R.id.btn_close);
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        btnAccept.setOnClickListener(v -> {
+            ExtendApplication.setApiKey(editTextApiKey.getText().toString());
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+    @Override
+    public void showEmptyLogIn() {
+        mLinearLayoutLogin.setVisibility(View.VISIBLE);
+        mLinearLayoutSignUp.setVisibility(View.VISIBLE);
+        mLinearLayoutExit.setVisibility(View.GONE);
     }
 
     @Override
     public void showLogIn() {
-
+        mLinearLayoutLogin.setVisibility(View.GONE);
+        mLinearLayoutSignUp.setVisibility(View.GONE);
+        mLinearLayoutExit.setVisibility(View.VISIBLE);
     }
 }
