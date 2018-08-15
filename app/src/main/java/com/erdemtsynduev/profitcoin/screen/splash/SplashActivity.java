@@ -1,5 +1,6 @@
 package com.erdemtsynduev.profitcoin.screen.splash;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,6 +22,11 @@ public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
     @Override
     public void setAuthorized(boolean isAuthorized) {
-        startActivity(new Intent(this, HomeActivity.class));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
+            startActivity(new Intent(this, HomeActivity.class), bundle);
+        } else {
+            startActivity(new Intent(this, HomeActivity.class));
+        }
     }
 }
