@@ -9,13 +9,11 @@ import com.erdemtsynduev.profitcoin.db.tables.CoinTable;
 import com.erdemtsynduev.profitcoin.db.tables.CoinTableDao;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTable;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTableDao;
-import com.erdemtsynduev.profitcoin.db.tables.RequestTable;
-import com.erdemtsynduev.profitcoin.db.tables.RequestTableDao;
 
 /**
  * The Room database.
  */
-@Database(entities = {CoinTable.class, FavoriteTable.class, RequestTable.class}, version = 2)
+@Database(entities = {CoinTable.class, FavoriteTable.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**
@@ -29,12 +27,6 @@ public abstract class AppDatabase extends RoomDatabase {
      */
     @SuppressWarnings("WeakerAccess")
     public abstract FavoriteTableDao favoriteTableDao();
-
-    /**
-     * @return The DAO for the Request table.
-     */
-    @SuppressWarnings("WeakerAccess")
-    public abstract RequestTableDao requestTableDao();
 
     /** The only instance */
     private static AppDatabase sInstance;

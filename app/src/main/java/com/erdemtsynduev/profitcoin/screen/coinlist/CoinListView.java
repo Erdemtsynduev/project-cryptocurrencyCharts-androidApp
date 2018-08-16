@@ -1,17 +1,42 @@
 package com.erdemtsynduev.profitcoin.screen.coinlist;
 
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 
 import java.util.List;
 
 public interface CoinListView extends MvpView {
 
-    void showCoinList(List<Datum> datumList);
+    void showErrorDialog(String message);
 
-    void showEmptyCoinList();
+    void hideErrorDialog();
+
+    void showSortDialog();
+
+    void hideSortDialog();
+
+    void onStartLoading();
+
+    void onFinishLoading();
+
+    void showRefreshing();
+
+    void hideRefreshing();
+
+    void showListProgress();
+
+    void hideListProgress();
 
     void openScreenDetail(Datum datum);
 
     void openScreenSearch(List<Datum> datumList);
+
+    void showEmptyCoinList();
+
+    void setCoinList(List<Datum> datumList, boolean maybeMore);
+
+    @StateStrategyType(AddToEndStrategy.class)
+    void addCoinList(List<Datum> datumList, boolean maybeMore);
 }

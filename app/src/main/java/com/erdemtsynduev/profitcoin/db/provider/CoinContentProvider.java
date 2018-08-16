@@ -18,8 +18,6 @@ import com.erdemtsynduev.profitcoin.db.tables.CoinTable;
 import com.erdemtsynduev.profitcoin.db.tables.CoinTableDao;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTable;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTableDao;
-import com.erdemtsynduev.profitcoin.db.tables.RequestTable;
-import com.erdemtsynduev.profitcoin.db.tables.RequestTableDao;
 
 import java.util.ArrayList;
 
@@ -35,14 +33,11 @@ public class CoinContentProvider extends ContentProvider {
      */
     public static final Uri URI_COIN_TABLE = Uri.parse("content://" + CONTENT_AUTHORITY + "/" + CoinTable.TABLE_NAME);
     public static final Uri URI_FAVORITE_TABLE = Uri.parse("content://" + CONTENT_AUTHORITY + "/" + FavoriteTable.TABLE_NAME);
-    public static final Uri URI_REQUEST_TABLE = Uri.parse("content://" + CONTENT_AUTHORITY + "/" + RequestTable.TABLE_NAME);
 
     private static final int CODE_COIN_TABLE_DIR = 1;
     private static final int CODE_COIN_TABLE_ITEM = 2;
     private static final int CODE_FAVORITE_TABLE_DIR = 3;
     private static final int CODE_FAVORITE_TABLE_ITEM = 4;
-    private static final int CODE_REQUEST_TABLE_DIR = 5;
-    private static final int CODE_REQUEST_TABLE_ITEM = 6;
 
     /**
      * The URI matcher.
@@ -54,8 +49,6 @@ public class CoinContentProvider extends ContentProvider {
         MATCHER.addURI(CONTENT_AUTHORITY, CoinTable.TABLE_NAME + "/*", CODE_COIN_TABLE_ITEM);
         MATCHER.addURI(CONTENT_AUTHORITY, FavoriteTable.TABLE_NAME, CODE_FAVORITE_TABLE_DIR);
         MATCHER.addURI(CONTENT_AUTHORITY, FavoriteTable.TABLE_NAME + "/*", CODE_FAVORITE_TABLE_ITEM);
-        MATCHER.addURI(CONTENT_AUTHORITY, RequestTable.TABLE_NAME, CODE_REQUEST_TABLE_DIR);
-        MATCHER.addURI(CONTENT_AUTHORITY, RequestTable.TABLE_NAME + "/*", CODE_REQUEST_TABLE_ITEM);
     }
 
     @Override
@@ -93,16 +86,6 @@ public class CoinContentProvider extends ContentProvider {
                 }
                 cursor.setNotificationUri(context.getContentResolver(), uri);
                 return cursor;
-            case CODE_REQUEST_TABLE_DIR:
-            case CODE_REQUEST_TABLE_ITEM:
-                RequestTableDao requestTableDao = AppDatabase.getInstance(context).requestTableDao();
-                if (MATCHER.match(uri) == CODE_REQUEST_TABLE_DIR) {
-                    cursor = requestTableDao.selectAll();
-                } else {
-                    cursor = requestTableDao.selectById(ContentUris.parseId(uri));
-                }
-                cursor.setNotificationUri(context.getContentResolver(), uri);
-                return cursor;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -120,10 +103,6 @@ public class CoinContentProvider extends ContentProvider {
                 return "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "." + FavoriteTable.TABLE_NAME;
             case CODE_FAVORITE_TABLE_ITEM:
                 return "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "." + FavoriteTable.TABLE_NAME;
-            case CODE_REQUEST_TABLE_DIR:
-                return "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "." + RequestTable.TABLE_NAME;
-            case CODE_REQUEST_TABLE_ITEM:
-                return "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "." + RequestTable.TABLE_NAME;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -151,14 +130,8 @@ public class CoinContentProvider extends ContentProvider {
                         .insert(FavoriteTable.fromContentValues(values));
                 context.getContentResolver().notifyChange(uri, null);
                 return ContentUris.withAppendedId(uri, id);
-            case CODE_REQUEST_TABLE_DIR:
-                id = AppDatabase.getInstance(context).requestTableDao()
-                        .insert(RequestTable.fromContentValues(values));
-                context.getContentResolver().notifyChange(uri, null);
-                return ContentUris.withAppendedId(uri, id);
             case CODE_COIN_TABLE_ITEM:
             case CODE_FAVORITE_TABLE_ITEM:
-            case CODE_REQUEST_TABLE_ITEM:
                 throw new IllegalArgumentException("Invalid URI, cannot insert with ID: " + uri);
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -176,7 +149,6 @@ public class CoinContentProvider extends ContentProvider {
         switch (MATCHER.match(uri)) {
             case CODE_COIN_TABLE_DIR:
             case CODE_FAVORITE_TABLE_DIR:
-            case CODE_REQUEST_TABLE_DIR:
                 throw new IllegalArgumentException("Invalid URI, cannot update without ID" + uri);
             case CODE_COIN_TABLE_ITEM:
                 count = AppDatabase.getInstance(context).coinTableDao()
@@ -185,11 +157,6 @@ public class CoinContentProvider extends ContentProvider {
                 return count;
             case CODE_FAVORITE_TABLE_ITEM:
                 count = AppDatabase.getInstance(context).favoriteTableDao()
-                        .deleteById(ContentUris.parseId(uri));
-                context.getContentResolver().notifyChange(uri, null);
-                return count;
-            case CODE_REQUEST_TABLE_ITEM:
-                count = AppDatabase.getInstance(context).requestTableDao()
                         .deleteById(ContentUris.parseId(uri));
                 context.getContentResolver().notifyChange(uri, null);
                 return count;
@@ -212,7 +179,6 @@ public class CoinContentProvider extends ContentProvider {
         switch (MATCHER.match(uri)) {
             case CODE_COIN_TABLE_DIR:
             case CODE_FAVORITE_TABLE_DIR:
-            case CODE_REQUEST_TABLE_DIR:
                 throw new IllegalArgumentException("Invalid URI, cannot update without ID" + uri);
             case CODE_COIN_TABLE_ITEM:
                 CoinTable coinTable = CoinTable.fromContentValues(values);
@@ -222,11 +188,6 @@ public class CoinContentProvider extends ContentProvider {
             case CODE_FAVORITE_TABLE_ITEM:
                 FavoriteTable favoriteTable = FavoriteTable.fromContentValues(values);
                 count = AppDatabase.getInstance(context).favoriteTableDao().update(favoriteTable);
-                context.getContentResolver().notifyChange(uri, null);
-                return count;
-            case CODE_REQUEST_TABLE_ITEM:
-                RequestTable requestTable = RequestTable.fromContentValues(values);
-                count = AppDatabase.getInstance(context).requestTableDao().update(requestTable);
                 context.getContentResolver().notifyChange(uri, null);
                 return count;
             default:
@@ -276,16 +237,8 @@ public class CoinContentProvider extends ContentProvider {
                     favoriteTables[i] = FavoriteTable.fromContentValues(valuesArray[i]);
                 }
                 return database.favoriteTableDao().insertAll(favoriteTables).length;
-            case CODE_REQUEST_TABLE_DIR:
-                database = AppDatabase.getInstance(context);
-                RequestTable[] requestTables = new RequestTable[valuesArray.length];
-                for (int i = 0; i < valuesArray.length; i++) {
-                    requestTables[i] = RequestTable.fromContentValues(valuesArray[i]);
-                }
-                return database.requestTableDao().insertAll(requestTables).length;
             case CODE_COIN_TABLE_ITEM:
             case CODE_FAVORITE_TABLE_ITEM:
-            case CODE_REQUEST_TABLE_ITEM:
                 throw new IllegalArgumentException("Invalid URI, cannot insert with ID: " + uri);
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);

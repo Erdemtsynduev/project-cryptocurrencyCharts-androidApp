@@ -25,19 +25,28 @@
             android:text="@string/saved_your_cryptocurrency"
             android:textColor="@color/colorText"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerViewPortfolio"
+            app:layout_constraintBottom_toTopOf="@+id/swipeLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewPortfolio"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_title_portfolio" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_title_portfolio">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewPortfolio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

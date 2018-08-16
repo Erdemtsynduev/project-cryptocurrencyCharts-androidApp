@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 
 public interface CoinMarketCapApi {
+    Integer PAGE_SIZE = 100;
 
     @GET("v1/cryptocurrency/listings/latest")
     Call<ListAllCryptocurrencies> getTicker(@Header("X-CMC_PRO_API_KEY") String apiKey);

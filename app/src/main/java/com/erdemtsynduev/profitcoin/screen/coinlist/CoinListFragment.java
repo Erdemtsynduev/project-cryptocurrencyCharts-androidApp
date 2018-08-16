@@ -1,10 +1,12 @@
 package com.erdemtsynduev.profitcoin.screen.coinlist;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -39,16 +42,20 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
 
     @BindView(R.id.recyclerView)
     RecyclerView mChartsListRecycler;
-
     @BindView(R.id.linearLayoutSorting)
     LinearLayout mLinearLayoutSorting;
-
     @BindView(R.id.searchTitle)
     SearchView mSearchTitle;
+    @BindView(R.id.swipeLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.fragment_coinlist_progress_bar)
+    ProgressBar mCoinListProgressBar;
 
+    private AlertDialog mErrorDialog;
+    private DialogPlus mSortDialog;
     private CoinListAdapter mCoinListAdapter;
+    private View emptyView;
 
-    private SelectTypeSort selectTypeSort;
     private static final String INTENT_DATUM = "datum";
     private static final String INTENT_DATUM_LIST = "datumList";
 
@@ -85,65 +92,112 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
 
         mChartsListRecycler.setAdapter(mCoinListAdapter);
 
-        mCoinListPresenter.getData();
+        mSwipeRefreshLayout.setOnRefreshListener(() -> mCoinListPresenter.loadCoinList(true));
 
-        mLinearLayoutSorting.setOnClickListener(v -> {
-            showSortDialog();
-        });
+        mLinearLayoutSorting.setOnClickListener(v -> mCoinListPresenter.onSortDialogOpen());
 
         mSearchTitle.setQueryHint(getString(R.string.search));
-        mSearchTitle.setOnClickListener(v -> {
-            mCoinListPresenter.openScreenSearch();
-        });
+        mSearchTitle.setOnClickListener(v -> mCoinListPresenter.openScreenSearch());
+
+        emptyView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) mChartsListRecycler.getParent(), false);
+        emptyView.setOnClickListener(v -> mCoinListPresenter.loadCoinList(false));
     }
 
-    private void showSortDialog() {
-        DialogPlus dialog = DialogPlus
-                .newDialog(getActivity())
+    @Override
+    public void showSortDialog() {
+        if (getContext() == null) {
+            return;
+        }
+
+        mSortDialog = DialogPlus.newDialog(getContext())
                 .setContentHolder(new ViewHolder(R.layout.dialog_sort))
                 .setCancelable(false)
                 .setGravity(Gravity.BOTTOM)
                 .create();
 
-        LinearLayout closeDialog = (LinearLayout) dialog.findViewById(R.id.linearLayoutCloseDialog);
-        LinearLayout sortByName = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortName);
-        LinearLayout sortByTotalSum = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortTotalSum);
-        LinearLayout sortByChangeDay = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortChangeDay);
-        LinearLayout sortBySevenDay = (LinearLayout) dialog.findViewById(R.id.linearLayoutSortChangeSevenDay);
+        LinearLayout closeDialog = (LinearLayout) mSortDialog.findViewById(R.id.linearLayoutCloseDialog);
+        LinearLayout sortByName = (LinearLayout) mSortDialog.findViewById(R.id.linearLayoutSortName);
+        LinearLayout sortByTotalSum = (LinearLayout) mSortDialog.findViewById(R.id.linearLayoutSortTotalSum);
+        LinearLayout sortByChangeDay = (LinearLayout) mSortDialog.findViewById(R.id.linearLayoutSortChangeDay);
+        LinearLayout sortBySevenDay = (LinearLayout) mSortDialog.findViewById(R.id.linearLayoutSortChangeSevenDay);
 
-        closeDialog.setOnClickListener(v -> dialog.dismiss());
+        closeDialog.setOnClickListener(v -> mCoinListPresenter.onSortDialogCancel());
+        sortByName.setOnClickListener(v -> mCoinListPresenter.onSortByNameCoinList());
+        sortByTotalSum.setOnClickListener(v -> mCoinListPresenter.onSortByPriceCoinList());
+        sortByChangeDay.setOnClickListener(v -> mCoinListPresenter.onSortByChangeDayCoinList());
+        sortBySevenDay.setOnClickListener(v -> mCoinListPresenter.onSortByChangeSevenDayCoinList());
 
-        sortByName.setOnClickListener(v -> {
-            mCoinListPresenter.sortByName();
-            dialog.dismiss();
-        });
-
-        sortByTotalSum.setOnClickListener(v -> {
-            mCoinListPresenter.sortByPrice();
-            dialog.dismiss();
-        });
-
-        sortByChangeDay.setOnClickListener(v -> {
-            mCoinListPresenter.sortByChangeDay();
-            dialog.dismiss();
-        });
-
-        sortBySevenDay.setOnClickListener(v -> {
-            mCoinListPresenter.sortByChangeSevenDay();
-            dialog.dismiss();
-        });
-
-        dialog.show();
+        mSortDialog.show();
     }
 
     @Override
-    public void showCoinList(List<Datum> datumList) {
-        mCoinListAdapter.setNewData(datumList);
+    public void hideSortDialog() {
+        if (mSortDialog != null && mSortDialog.isShowing()) {
+            mSortDialog.dismiss();
+        }
     }
 
     @Override
     public void showEmptyCoinList() {
+        mCoinListAdapter.setEmptyView(emptyView);
+    }
 
+    @Override
+    public void setCoinList(List<Datum> datumList, boolean maybeMore) {
+        mCoinListAdapter.setNewData(datumList);
+    }
+
+    @Override
+    public void addCoinList(List<Datum> datumList, boolean maybeMore) {
+        mCoinListAdapter.addData(datumList);
+    }
+
+    @Override
+    public void onStartLoading() {
+        mSwipeRefreshLayout.setEnabled(false);
+    }
+
+    @Override
+    public void onFinishLoading() {
+        mSwipeRefreshLayout.setEnabled(true);
+    }
+
+    @Override
+    public void showRefreshing() {
+        mSwipeRefreshLayout.post(() -> mSwipeRefreshLayout.setRefreshing(true));
+    }
+
+    @Override
+    public void hideRefreshing() {
+        mSwipeRefreshLayout.post(() -> mSwipeRefreshLayout.setRefreshing(false));
+    }
+
+    @Override
+    public void showListProgress() {
+        mChartsListRecycler.setVisibility(View.GONE);
+        mCoinListProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideListProgress() {
+        mChartsListRecycler.setVisibility(View.VISIBLE);
+        mCoinListProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showErrorDialog(String message) {
+        mErrorDialog = new AlertDialog.Builder(getContext())
+                .setTitle(R.string.app_name)
+                .setMessage(message)
+                .setOnCancelListener(dialog -> mCoinListPresenter.onErrorDialogCancel())
+                .show();
+    }
+
+    @Override
+    public void hideErrorDialog() {
+        if (mErrorDialog != null && mErrorDialog.isShowing()) {
+            mErrorDialog.hide();
+        }
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 
 public class CoinListAdapter extends BaseQuickAdapter<Datum, BaseViewHolder> {
 
-    Context context = null;
+    private Context context;
 
     public CoinListAdapter(Context context) {
         super(R.layout.item_coinlist, null);
