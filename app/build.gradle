@@ -62,7 +62,7 @@ dependencies {
     implementation deps.timber
     implementation deps.gson
     implementation deps.picasso
-    implementation deps.otto
+    implementation deps.eventbus
     implementation deps.baseRecyclerViewAdapterHelper
     implementation deps.dialogplus
     implementation deps.paperdb
