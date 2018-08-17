@@ -48,6 +48,10 @@
     <string name="activity_signup_error_password">Enter password!</string>
     <string name="activity_signup_error_password_less">Password too short, enter minimum 6 characters!</string>
 
+    <string name="activity_reset_password_error_reset">Enter your registered email id</string>
+    <string name="activity_reset_password_error_reset_send">We have sent you instructions to reset your password!</string>
+    <string name="activity_reset_password_success">Failed to send reset email!</string>
+
     <string name="dialog_title_sort">Sort by:</string>
     <string name="dialog_sort_name">Name</string>
     <string name="dialog_sort_amount">Amount</string>

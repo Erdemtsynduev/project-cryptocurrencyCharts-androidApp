@@ -20,6 +20,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.erdemtsynduev.profitcoin.screen.coinlist.CoinListFragment.INTENT_DATUM;
+import static com.erdemtsynduev.profitcoin.screen.coinlist.CoinListFragment.INTENT_DATUM_LIST;
+
 public class SearchCoinActivity extends MvpAppCompatActivity implements SearchCoinView {
 
     @InjectPresenter
@@ -47,8 +50,8 @@ public class SearchCoinActivity extends MvpAppCompatActivity implements SearchCo
         List<Datum> datumList = new ArrayList<>();
 
         // Get the requested task id
-        if (getIntent().getParcelableArrayListExtra("datumList") != null) {
-            datumList = getIntent().getParcelableArrayListExtra("datumList");
+        if (getIntent().getParcelableArrayListExtra(INTENT_DATUM_LIST) != null) {
+            datumList = getIntent().getParcelableArrayListExtra(INTENT_DATUM_LIST);
         }
 
         mSearchListAdapter = new SearchListAdapter(this, datumList);
@@ -90,7 +93,7 @@ public class SearchCoinActivity extends MvpAppCompatActivity implements SearchCo
     @Override
     public void openScreenDetail(Datum datum) {
         Intent intent = new Intent(this, CoinDetailActivity.class);
-        intent.putExtra("datum", datum);
+        intent.putExtra(INTENT_DATUM, datum);
         startActivity(intent);
     }
 }

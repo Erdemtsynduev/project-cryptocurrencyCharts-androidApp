@@ -66,16 +66,16 @@ public class ResetPasswordActivity extends MvpAppCompatActivity implements Reset
 
     @Override
     public void showErrorReset() {
-        Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplication(), getString(R.string.activity_reset_password_error_reset), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showErrorSendReset() {
-        Toast.makeText(ResetPasswordActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ResetPasswordActivity.this, getString(R.string.activity_reset_password_error_reset_send), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showSuccessResetSend() {
-        Toast.makeText(ResetPasswordActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ResetPasswordActivity.this, getString(R.string.activity_reset_password_success), Toast.LENGTH_SHORT).show();
     }
 }

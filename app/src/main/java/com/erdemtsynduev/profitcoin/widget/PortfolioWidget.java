@@ -58,15 +58,4 @@ public class PortfolioWidget extends AppWidgetProvider {
     private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
         views.setRemoteAdapter(R.id.widget_list, new Intent(context, WidgetService.class));
     }
-
-    /**
-     * Sets the remote adapter used to fill in the list items
-     *
-     * @param views RemoteViews to set the RemoteAdapter
-     */
-    @SuppressWarnings("deprecation")
-    private static void setRemoteAdapterV11(Context context, @NonNull final RemoteViews views) {
-        views.setRemoteAdapter(0, R.id.widget_list,
-                new Intent(context, WidgetService.class));
-    }
 }
