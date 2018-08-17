@@ -3,25 +3,34 @@ package com.erdemtsynduev.profitcoin.widget;
 import android.annotation.TargetApi;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import com.erdemtsynduev.profitcoin.R;
+
+import java.util.Objects;
 
 public class PortfolioWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
 
-        // Set up the collection
-        setRemoteAdapter(context, views);
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+        RemoteViews remoteViews = getFavoriteCountriesFromGridView(context);
+
+        appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
+    }
+
+    private static RemoteViews getFavoriteCountriesFromGridView(Context context) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+
+        Intent gridIntent = new Intent(context, WidgetService.class);
+        views.setRemoteAdapter(R.id.widget_list, gridIntent);
+
+        return views;
     }
 
     @Override
@@ -30,7 +39,14 @@ public class PortfolioWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager,
+                                          int appWidgetId, Bundle newOptions) {
+        updateAppWidget(context, appWidgetManager, appWidgetId);
+        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
     }
 
     @Override
@@ -43,19 +59,22 @@ public class PortfolioWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    public static void updateAppWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-        }
-    }
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (intent != null) {
+            if (Objects.requireNonNull(intent.getAction()).equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
 
-    /**
-     * Sets the remote adapter used to fill in the list items
-     *
-     * @param views RemoteViews to set the RemoteAdapter
-     */
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
-        views.setRemoteAdapter(R.id.widget_list, new Intent(context, WidgetService.class));
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                ComponentName thisWidget = new ComponentName(context, PortfolioWidget.class);
+
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+
+                RemoteViews remoteViews = getFavoriteCountriesFromGridView(context);
+
+                appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
+                onUpdate(context, appWidgetManager, appWidgetIds);
+            }
+        }
     }
 }

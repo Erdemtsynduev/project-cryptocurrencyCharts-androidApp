@@ -13,7 +13,7 @@ import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Quote;
 import com.erdemtsynduev.profitcoin.screen.portfolio.event.UpdateLikeCoinListEvent;
-import com.erdemtsynduev.profitcoin.widget.WidgetService;
+import com.erdemtsynduev.profitcoin.utils.AppWidgetUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,6 +21,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 @InjectViewState
 public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
@@ -150,7 +152,8 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
     }
 
     private void onLoadingSuccess(List<Datum> datumListFavorite) {
-        WidgetService.updateWidget(ExtendApplication.getAppComponent().getContext(), datumListFavorite);
+        Paper.book().write("datumList", datumListFavorite);
+        AppWidgetUtils.update(ExtendApplication.getAppComponent().getContext());
         getViewState().showPortfolioList(datumListFavorite);
     }
 

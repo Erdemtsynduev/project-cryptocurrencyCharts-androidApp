@@ -1,7 +1,6 @@
 package com.erdemtsynduev.profitcoin.widget;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -13,29 +12,23 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-/**
- * WidgetDataProvider acts as the adapter for the collection view widget,
- * providing RemoteViews to the widget in the getViewAt method.
- */
-public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
+public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private static final String TAG = "WidgetDataProvider";
+    private Context mContext;
+    private List<Datum> mDatumList = new ArrayList<>();
 
-    List<Datum> mDatumList = new ArrayList<>();
-    Context mContext = null;
-
-    public WidgetDataProvider(Context context, Intent intent) {
-        mContext = context;
+    ListRemoteViewsFactory(Context context) {
+        this.mContext = context;
     }
 
     @Override
     public void onCreate() {
-
+        initData();
     }
 
     @Override
     public void onDataSetChanged() {
-        mDatumList = Paper.book().read("datumList");
+        initData();
     }
 
     @Override
@@ -57,10 +50,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
             if (mDatumList.get(position).getSymbol() != null && !mDatumList.get(position).getSymbol().isEmpty()) {
                 view.setTextViewText(R.id.widget_text_symbol_currency, mDatumList.get(position).getSymbol());
             }
-            if (mDatumList.get(position).getName() != null && !mDatumList.get(position).getName().isEmpty()) {
-                view.setTextViewText(R.id.widget_text_name_currency, mDatumList.get(position).getName());
-            }
-
             if (mDatumList.get(position).getQuote().getUSD().getPercentChange24h() != null &&
                     !mDatumList.get(position).getQuote().getUSD().getPercentChange24h().isEmpty()) {
                 view.setTextViewText(R.id.widget_text_hours, mDatumList.get(position).getQuote().getUSD().getPercentChange24h());
@@ -83,7 +72,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
                 }
             }
         }
-
         return view;
     }
 
@@ -98,12 +86,17 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
     public boolean hasStableIds() {
         return true;
+    }
+
+    private void initData() {
+        mDatumList.clear();
+        mDatumList.addAll(mDatumList = Paper.book().read("datumList"));
     }
 }

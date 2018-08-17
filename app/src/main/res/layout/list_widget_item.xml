@@ -20,29 +20,6 @@
         tools:text="BTC" />
 
     <TextView
-        android:id="@+id/widget_text_devider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/item_currency_devider"
-        android:textColor="@color/colorText"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/widget_text_name_currency"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/item_currency_name"
-        android:textColor="@color/colorText"
-        android:textSize="18sp"
-        tools:text="Bitcoin" />
-
-    <TextView
         android:id="@+id/widget_text_title_24h"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
