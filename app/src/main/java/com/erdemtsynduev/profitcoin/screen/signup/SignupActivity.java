@@ -25,19 +25,14 @@ public class SignupActivity extends MvpAppCompatActivity implements SignupView {
 
     @BindView(R.id.email)
     EditText inputEmail;
-
     @BindView(R.id.password)
     EditText inputPassword;
-
     @BindView(R.id.sign_in_button)
     Button btnSignIn;
-
     @BindView(R.id.sign_up_button)
     Button btnSignUp;
-
     @BindView(R.id.btn_reset_password)
     Button btnResetPassword;
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 

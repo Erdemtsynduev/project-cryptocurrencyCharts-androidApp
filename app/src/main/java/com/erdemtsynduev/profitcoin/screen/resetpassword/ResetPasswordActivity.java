@@ -23,13 +23,10 @@ public class ResetPasswordActivity extends MvpAppCompatActivity implements Reset
 
     @BindView(R.id.email)
     EditText inputEmail;
-
     @BindView(R.id.btn_reset_password)
     Button btnReset;
-
     @BindView(R.id.btn_back)
     Button btnBack;
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 

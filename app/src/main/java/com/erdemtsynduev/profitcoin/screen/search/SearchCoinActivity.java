@@ -27,10 +27,8 @@ public class SearchCoinActivity extends MvpAppCompatActivity implements SearchCo
 
     @BindView(R.id.img_back)
     ImageView toolbarImgBack;
-
     @BindView(R.id.searchTitle)
     SearchView toolbarSearch;
-
     @BindView(R.id.list_view)
     ListView listView;
 

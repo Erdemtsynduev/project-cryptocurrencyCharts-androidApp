@@ -33,7 +33,6 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
 
     @BindView(R.id.recyclerViewPortfolio)
     RecyclerView mPortfolioListRecycler;
-
     @BindView(R.id.toolbarTitle)
     TextView toolbarTitle;
 
