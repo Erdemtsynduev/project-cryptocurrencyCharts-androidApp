@@ -6,6 +6,16 @@ import com.arellomobile.mvp.MvpPresenter;
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        onClickItemCurrencyList();
+    }
+
+    public void onClickItemCurrencyList() {
+        getViewState().onClickItemCurrencyList();
+    }
+
     public void onPortfolioSelection() {
         getViewState().showPortfolioFragment();
     }
@@ -18,7 +28,15 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         getViewState().showAccountFragment();
     }
 
-    public void showDialogExit() {
-        getViewState().showDialogExit();
+    public void onExitDialogOpen() {
+        getViewState().showExitDialog();
+    }
+
+    public void onExitDialogAccept() {
+        getViewState().closeApp();
+    }
+
+    public void onExitDialogClose() {
+        getViewState().hideExitDialog();
     }
 }

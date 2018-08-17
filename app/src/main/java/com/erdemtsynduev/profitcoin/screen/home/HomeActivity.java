@@ -27,6 +27,7 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
 
     private FragmentManager fragmentManager;
     private Fragment currentFragment;
+    private AlertDialog alertDialog;
 
     private static final String TAG_FRAGMENT_PORTFOLIO = "fragment_portfolio";
     private static final String TAG_FRAGMENT_CURRENCY = "fragment_currency";
@@ -40,8 +41,6 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
 
         // instantiate the fragment manager
         fragmentManager = getSupportFragmentManager();
-
-        showCurrencyListFragment();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
@@ -58,8 +57,21 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
                     }
                     return true;
                 });
+    }
 
+    @Override
+    public void onClickItemPortfolio() {
+        bottomNavigationView.setSelectedItemId(R.id.menu_portfolio);
+    }
+
+    @Override
+    public void onClickItemCurrencyList() {
         bottomNavigationView.setSelectedItemId(R.id.menu_list_currency);
+    }
+
+    @Override
+    public void onClickItemAccount() {
+        bottomNavigationView.setSelectedItemId(R.id.menu_setting);
     }
 
     @Override
@@ -100,29 +112,33 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
     }
 
     @Override
-    public void showDialogExit() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder
+    public void showExitDialog() {
+        alertDialog = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.app_name))
                 .setMessage(getString(R.string.dialog_exit_description))
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.dialog_exit_positive), (dialog, which) -> {
-                    closeApp();
+                    mHomePresenter.onExitDialogAccept();
                 })
                 .setNegativeButton(getString(R.string.dialog_exit_negative), (dialog, which) -> {
-                    dialog.cancel();
-                });
+                    mHomePresenter.onExitDialogClose();
+                }).create();
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
 
     @Override
-    public void onBackPressed() {
-        mHomePresenter.showDialogExit();
+    public void hideExitDialog() {
+        alertDialog.cancel();
     }
 
-    private void closeApp() {
+    @Override
+    public void onBackPressed() {
+        mHomePresenter.onExitDialogOpen();
+    }
+
+    @Override
+    public void closeApp() {
         finishAffinity();
         System.exit(0);
     }

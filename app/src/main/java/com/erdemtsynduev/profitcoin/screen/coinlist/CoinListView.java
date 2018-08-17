@@ -2,6 +2,7 @@ package com.erdemtsynduev.profitcoin.screen.coinlist;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 
@@ -29,8 +30,10 @@ public interface CoinListView extends MvpView {
 
     void hideListProgress();
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void openScreenDetail(Datum datum);
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void openScreenSearch(List<Datum> datumList);
 
     void showEmptyCoinList();
