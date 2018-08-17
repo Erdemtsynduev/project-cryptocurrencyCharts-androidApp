@@ -4,8 +4,6 @@ import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -18,6 +16,8 @@ import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.network.model.request.NetworkRequest;
 import com.erdemtsynduev.profitcoin.network.model.request.Request;
 import com.erdemtsynduev.profitcoin.network.model.request.RequestStatus;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +32,7 @@ public class NetworkService extends IntentService {
     CoinMarketCapService mCoinMarketCapService;
 
     private static final String REQUEST_KEY = "request";
+    public static final String TABLE_NAME = "RequestTable";
 
     public static void start(@NonNull Context context, @NonNull Request request) {
         Intent intent = new Intent(context, NetworkService.class);
@@ -52,6 +53,7 @@ public class NetworkService extends IntentService {
         if (savedRequest != null && request.getStatus() == RequestStatus.IN_PROGRESS) {
             return;
         }
+
         request.setStatus(RequestStatus.IN_PROGRESS);
         Paper.book().write(request.getRequest(), request);
         sendPostBus();
@@ -80,7 +82,6 @@ public class NetworkService extends IntentService {
     }
 
     private void sendPostBus() {
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> ExtendApplication.getAppComponent().getBus().post(new DbTableChangedEvent("RequestTable")));
+        EventBus.getDefault().post(new DbTableChangedEvent(TABLE_NAME));
     }
 }

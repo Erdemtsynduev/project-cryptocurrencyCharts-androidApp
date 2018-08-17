@@ -12,7 +12,12 @@ import com.erdemtsynduev.profitcoin.db.utils.GsonHolder;
 import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Quote;
+import com.erdemtsynduev.profitcoin.screen.portfolio.event.UpdateLikeCoinListEvent;
 import com.erdemtsynduev.profitcoin.widget.WidgetService;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,7 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
 
+        subscribeBus();
         loadFavoriteCoinList(false);
     }
 
@@ -150,5 +156,24 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
 
     private void onLoadingFailed() {
         getViewState().showEmptyPortfolioList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unsubscribeBus();
+    }
+
+    public void subscribeBus() {
+        EventBus.getDefault().register(this);
+    }
+
+    public void unsubscribeBus() {
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTableChanged(UpdateLikeCoinListEvent event) {
+        loadFavoriteCoinList(false);
     }
 }

@@ -10,6 +10,9 @@ import com.erdemtsynduev.profitcoin.db.provider.CoinContentProvider;
 import com.erdemtsynduev.profitcoin.db.tables.FavoriteTable;
 import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
+import com.erdemtsynduev.profitcoin.screen.portfolio.event.UpdateLikeCoinListEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 @InjectViewState
 public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
@@ -35,6 +38,7 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
             getViewState().showErrorAddFavorite();
         }
 
+        updateLikes();
         getFavoriteDataFromDb();
     }
 
@@ -74,6 +78,7 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
                 insert(CoinContentProvider.URI_FAVORITE_TABLE, FavoriteTable.toContentValues(favoriteCoin));
 
         isFavoriteCoin = true;
+        sendBus();
         showAddFavoriteSuccess();
     }
 
@@ -86,7 +91,12 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
                 delete(Uri.parse(CoinContentProvider.URI_FAVORITE_TABLE + "/" + mDatum.getId()), null, null);
 
         isFavoriteCoin = false;
+        sendBus();
         deleteFavoriteSuccess();
+    }
+
+    private void sendBus() {
+        EventBus.getDefault().post(new UpdateLikeCoinListEvent());
     }
 
     public void showAddFavoriteSuccess() {

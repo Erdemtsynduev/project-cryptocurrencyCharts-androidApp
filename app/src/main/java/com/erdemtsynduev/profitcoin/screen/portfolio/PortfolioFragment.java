@@ -44,7 +44,6 @@ public class PortfolioFragment extends MvpAppCompatFragment implements Portfolio
     ProgressBar mPortfolioProgressBar;
 
     private CoinListAdapter mCoinListAdapter;
-
     private View emptyView;
 
     public static PortfolioFragment getInstance() {

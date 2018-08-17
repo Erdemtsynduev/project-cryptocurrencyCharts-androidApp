@@ -17,7 +17,10 @@ import com.erdemtsynduev.profitcoin.network.model.request.NetworkRequest;
 import com.erdemtsynduev.profitcoin.network.model.request.Request;
 import com.erdemtsynduev.profitcoin.network.model.request.RequestStatus;
 import com.erdemtsynduev.profitcoin.screen.BasePresenter;
-import com.squareup.otto.Subscribe;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +29,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.paperdb.Paper;
+
+import static com.erdemtsynduev.profitcoin.network.NetworkService.TABLE_NAME;
 
 @InjectViewState
 public class CoinListPresenter extends BasePresenter<CoinListView> {
@@ -45,6 +50,8 @@ public class CoinListPresenter extends BasePresenter<CoinListView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+
+        subscribeBus();
         loadCoinList(false);
     }
 
@@ -168,17 +175,23 @@ public class CoinListPresenter extends BasePresenter<CoinListView> {
         getViewState().hideSortDialog();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unsubscribeBus();
+    }
+
     public void subscribeBus() {
-        ExtendApplication.getAppComponent().getBus().register(this);
+        EventBus.getDefault().register(this);
     }
 
     public void unsubscribeBus() {
-        ExtendApplication.getAppComponent().getBus().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTableChanged(DbTableChangedEvent event) {
-        if (event.nameTable.equals("RequestTable")) {
+        if (event.nameTable.equals(TABLE_NAME)) {
             Request savedRequest = Paper.book().read(NetworkRequest.LIST_COIN);
 
             if (savedRequest.getStatus() == RequestStatus.IN_PROGRESS) {

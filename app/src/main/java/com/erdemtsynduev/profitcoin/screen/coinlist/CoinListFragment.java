@@ -213,16 +213,4 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
         intent.putParcelableArrayListExtra(INTENT_DATUM_LIST, (ArrayList<? extends Parcelable>) datumList);
         startActivity(intent);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mCoinListPresenter.subscribeBus();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mCoinListPresenter.unsubscribeBus();
-    }
 }
