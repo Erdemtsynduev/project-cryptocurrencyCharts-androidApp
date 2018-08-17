@@ -6,6 +6,11 @@ import com.arellomobile.mvp.MvpPresenter;
 @InjectViewState
 public class LoginPresenter extends MvpPresenter<LoginView> {
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+    }
+
     public void openScreenSignUp() {
         getViewState().openScreenSignUp();
     }

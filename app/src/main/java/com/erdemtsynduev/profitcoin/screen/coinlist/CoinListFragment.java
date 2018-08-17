@@ -56,8 +56,8 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
     private CoinListAdapter mCoinListAdapter;
     private View emptyView;
 
-    private static final String INTENT_DATUM = "datum";
-    private static final String INTENT_DATUM_LIST = "datumList";
+    public static final String INTENT_DATUM = "datum";
+    public static final String INTENT_DATUM_LIST = "datumList";
 
     public static CoinListFragment getInstance() {
         return new CoinListFragment();

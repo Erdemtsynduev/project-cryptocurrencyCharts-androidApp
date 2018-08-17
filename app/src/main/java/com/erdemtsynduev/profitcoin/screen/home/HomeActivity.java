@@ -117,19 +117,19 @@ public class HomeActivity extends MvpAppCompatActivity implements HomeView {
                 .setTitle(getString(R.string.app_name))
                 .setMessage(getString(R.string.dialog_exit_description))
                 .setCancelable(false)
-                .setPositiveButton(getString(R.string.dialog_exit_positive), (dialog, which) -> {
-                    mHomePresenter.onExitDialogAccept();
-                })
-                .setNegativeButton(getString(R.string.dialog_exit_negative), (dialog, which) -> {
-                    mHomePresenter.onExitDialogClose();
-                }).create();
+                .setPositiveButton(getString(R.string.dialog_exit_positive),
+                        (dialog, which) -> mHomePresenter.onExitDialogAccept())
+                .setNegativeButton(getString(R.string.dialog_exit_negative),
+                        (dialog, which) -> mHomePresenter.onExitDialogClose()).create();
 
         alertDialog.show();
     }
 
     @Override
     public void hideExitDialog() {
-        alertDialog.cancel();
+        if (alertDialog != null && alertDialog.isShowing()) {
+            alertDialog.dismiss();
+        }
     }
 
     @Override

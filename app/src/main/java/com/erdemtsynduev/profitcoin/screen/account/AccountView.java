@@ -6,6 +6,14 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 public interface AccountView extends MvpView {
 
+    void showAddApiDialog();
+
+    void hideAddApiDialog();
+
+    void showEmptyLogIn();
+
+    void showLogIn();
+
     @StateStrategyType(OneExecutionStateStrategy.class)
     void openScreenLogin();
 
@@ -17,10 +25,4 @@ public interface AccountView extends MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void openScreenAboutApp();
-
-    void openDialogAddApiKey();
-
-    void showEmptyLogIn();
-
-    void showLogIn();
 }

@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.erdemtsynduev.profitcoin.ExtendApplication;
 import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.screen.about.AboutActivity;
 import com.erdemtsynduev.profitcoin.screen.help.HelpActivity;
@@ -33,21 +32,18 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
 
     @BindView(R.id.frame_about_program)
     LinearLayout mLinearLayoutAbout;
-
     @BindView(R.id.frame_help)
     LinearLayout mLinearLayoutHelp;
-
     @BindView(R.id.frame_login)
     LinearLayout mLinearLayoutLogin;
-
     @BindView(R.id.frame_signup)
     LinearLayout mLinearLayoutSignUp;
-
     @BindView(R.id.frame_add_api_key)
     LinearLayout mLinearLayoutAddApiKey;
-
     @BindView(R.id.frame_exit)
     LinearLayout mLinearLayoutExit;
+
+    private DialogPlus dialogPlus;
 
     public static AccountFragment getInstance() {
         return new AccountFragment();
@@ -66,29 +62,12 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
 
         ButterKnife.bind(this, view);
 
-        mLinearLayoutAbout.setOnClickListener(v -> {
-            mAccountPresenter.openScreenAboutApp();
-        });
-
-        mLinearLayoutHelp.setOnClickListener(v -> {
-            mAccountPresenter.openScreenHelp();
-        });
-
-        mLinearLayoutLogin.setOnClickListener(v -> {
-            mAccountPresenter.openScreenLogin();
-        });
-
-        mLinearLayoutSignUp.setOnClickListener(v -> {
-            mAccountPresenter.openScreenSignin();
-        });
-
-        mLinearLayoutAddApiKey.setOnClickListener(v -> {
-            mAccountPresenter.openDialogAddApiKey();
-        });
-
-        mLinearLayoutExit.setOnClickListener(v -> {
-            mAccountPresenter.exitAccount();
-        });
+        mLinearLayoutAbout.setOnClickListener(v -> mAccountPresenter.openScreenAboutApp());
+        mLinearLayoutHelp.setOnClickListener(v -> mAccountPresenter.openScreenHelp());
+        mLinearLayoutLogin.setOnClickListener(v -> mAccountPresenter.openScreenLogin());
+        mLinearLayoutSignUp.setOnClickListener(v -> mAccountPresenter.openScreenSignup());
+        mLinearLayoutAddApiKey.setOnClickListener(v -> mAccountPresenter.onAddApiDialogOpen());
+        mLinearLayoutExit.setOnClickListener(v -> mAccountPresenter.exitAccount());
     }
 
     @Override
@@ -116,26 +95,33 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
     }
 
     @Override
-    public void openDialogAddApiKey() {
-        DialogPlus dialog = DialogPlus
+    public void showAddApiDialog() {
+        if (getActivity() == null) {
+            return;
+        }
+
+        dialogPlus = DialogPlus
                 .newDialog(getActivity())
                 .setContentHolder(new ViewHolder(R.layout.dialog_add_api_key))
                 .setCancelable(false)
                 .setGravity(Gravity.BOTTOM)
                 .create();
 
-        EditText editTextApiKey = (EditText) dialog.findViewById(R.id.editText);
-        Button btnAccept = (Button) dialog.findViewById(R.id.btn_accept);
-        Button btnClose = (Button) dialog.findViewById(R.id.btn_close);
+        EditText editTextApiKey = (EditText) dialogPlus.findViewById(R.id.editText);
+        Button btnAccept = (Button) dialogPlus.findViewById(R.id.btn_accept);
+        Button btnClose = (Button) dialogPlus.findViewById(R.id.btn_close);
 
-        btnClose.setOnClickListener(v -> dialog.dismiss());
+        btnClose.setOnClickListener(v -> mAccountPresenter.onAddApiDialogCancel());
+        btnAccept.setOnClickListener(v -> mAccountPresenter.onAddApiDialogAccept(editTextApiKey.getText().toString()));
 
-        btnAccept.setOnClickListener(v -> {
-            ExtendApplication.setApiKey(editTextApiKey.getText().toString());
-            dialog.dismiss();
-        });
+        dialogPlus.show();
+    }
 
-        dialog.show();
+    @Override
+    public void hideAddApiDialog() {
+        if (dialogPlus != null && dialogPlus.isShowing()) {
+            dialogPlus.dismiss();
+        }
     }
 
     @Override

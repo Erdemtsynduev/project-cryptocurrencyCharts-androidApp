@@ -45,6 +45,11 @@ public class FavoriteCoin implements Parcelable {
     public FavoriteCoin() {
     }
 
+    public FavoriteCoin(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     protected FavoriteCoin(Parcel in) {
         this.id = in.readString();
         this.name = in.readString();

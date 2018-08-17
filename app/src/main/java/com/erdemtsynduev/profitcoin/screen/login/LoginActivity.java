@@ -27,19 +27,14 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @BindView(R.id.email)
     EditText inputEmail;
-
     @BindView(R.id.password)
     EditText inputPassword;
-
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-
     @BindView(R.id.btn_signup)
     Button btnSignup;
-
     @BindView(R.id.btn_login)
     Button btnLogin;
-
     @BindView(R.id.btn_reset_password)
     Button btnReset;
 
