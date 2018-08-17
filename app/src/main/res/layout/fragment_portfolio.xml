@@ -25,12 +25,12 @@
             android:text="@string/saved_your_cryptocurrency"
             android:textColor="@color/colorText"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/swipeLayout"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_portfolio_swipe_refresh_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeLayout"
+            android:id="@+id/fragment_portfolio_swipe_refresh_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -41,10 +41,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_title_portfolio">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerViewPortfolio"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/fragment_portfolio_recycler_view_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ProgressBar
+                    android:id="@+id/fragment_portfolio_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+            </FrameLayout>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 

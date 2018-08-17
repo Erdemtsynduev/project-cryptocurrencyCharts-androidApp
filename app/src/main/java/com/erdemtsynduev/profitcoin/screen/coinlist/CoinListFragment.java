@@ -100,7 +100,7 @@ public class CoinListFragment extends MvpAppCompatFragment implements CoinListVi
         mSearchTitle.setOnClickListener(v -> mCoinListPresenter.openScreenSearch());
 
         emptyView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) mChartsListRecycler.getParent(), false);
-        emptyView.setOnClickListener(v -> mCoinListPresenter.loadCoinList(false));
+        emptyView.setOnClickListener(v -> mCoinListPresenter.loadCoinList(true));
     }
 
     @Override

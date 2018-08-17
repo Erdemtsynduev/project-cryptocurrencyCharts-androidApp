@@ -12,6 +12,7 @@ import com.erdemtsynduev.profitcoin.db.utils.GsonHolder;
 import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Quote;
+import com.erdemtsynduev.profitcoin.widget.WidgetService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,27 +23,57 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
     private List<Datum> datumListSaved = new ArrayList<>();
     private List<FavoriteCoin> favoriteCoinsSaved = new ArrayList<>();
 
+    private boolean mIsInLoading;
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        getViewState().showEmptyPortfolioList();
+
+        loadFavoriteCoinList(false);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void loadFavoriteCoinList(boolean isRefreshing) {
+        loadData(isRefreshing);
+    }
+
+    private void loadData(boolean isRefreshing) {
+        if (mIsInLoading) {
+            return;
+        }
+        mIsInLoading = true;
+
+        getViewState().onStartLoading();
+        showProgress(isRefreshing);
+
+        getData(isRefreshing);
+    }
+
+    private void showProgress(boolean isRefreshing) {
+        if (isRefreshing) {
+            getViewState().showRefreshing();
+        } else {
+            getViewState().showListProgress();
+        }
+    }
+
+    private void hideProgress(boolean isRefreshing) {
+        if (isRefreshing) {
+            getViewState().hideRefreshing();
+        } else {
+            getViewState().hideListProgress();
+        }
     }
 
     public void openScreenDetail(Datum datum) {
         getViewState().openScreenDetail(datum);
     }
 
-    public void getData() {
+    public void getData(boolean mIsRefreshing) {
         datumListSaved.clear();
         favoriteCoinsSaved.clear();
         getCoinDataFromDb();
         getCoinFavoriteDataFromDb();
-        setDataList();
+        setDataList(mIsRefreshing);
     }
 
     private void getCoinDataFromDb() {
@@ -66,7 +97,6 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
                 datumListSaved.add(datum);
             }
             cursorData.close();
-            setDataList();
         }
     }
 
@@ -85,7 +115,7 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
         }
     }
 
-    private void setDataList() {
+    private void setDataList(boolean isRefreshing) {
         List<Datum> datumListFavorite = new ArrayList<>();
         if (!favoriteCoinsSaved.isEmpty() && !datumListSaved.isEmpty()) {
             for (int i = 0; i < datumListSaved.size(); i++) {
@@ -97,9 +127,28 @@ public class PortfolioPresenter extends MvpPresenter<PortfolioView> {
             }
         }
         if (datumListFavorite.size() != 0) {
-            getViewState().showPortfolioList(datumListFavorite);
+            onLoadingFinish(isRefreshing);
+            onLoadingSuccess(datumListFavorite);
         } else {
-            getViewState().showEmptyPortfolioList();
+            onLoadingFinish(isRefreshing);
+            onLoadingFailed();
         }
+    }
+
+    private void onLoadingFinish(boolean isRefreshing) {
+        mIsInLoading = false;
+
+        getViewState().onFinishLoading();
+
+        hideProgress(isRefreshing);
+    }
+
+    private void onLoadingSuccess(List<Datum> datumListFavorite) {
+        WidgetService.updateWidget(ExtendApplication.getAppComponent().getContext(), datumListFavorite);
+        getViewState().showPortfolioList(datumListFavorite);
+    }
+
+    private void onLoadingFailed() {
+        getViewState().showEmptyPortfolioList();
     }
 }

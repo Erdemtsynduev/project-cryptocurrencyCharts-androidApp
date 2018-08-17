@@ -34,6 +34,8 @@ public class CoinListPresenter extends BasePresenter<CoinListView> {
     CoinMarketCapService mCoinMarketCapService;
 
     private boolean mIsInLoading;
+    private boolean mIsPageLoading;
+    private boolean mIsRefreshing;
     private List<Datum> datumListSaved = new ArrayList<>();
 
     public CoinListPresenter() {
@@ -54,7 +56,10 @@ public class CoinListPresenter extends BasePresenter<CoinListView> {
         if (mIsInLoading) {
             return;
         }
-        mIsInLoading = true;
+
+        this.mIsInLoading = true;
+        this.mIsPageLoading = isPageLoading;
+        this.mIsRefreshing = isRefreshing;
 
         getViewState().onStartLoading();
 
@@ -189,9 +194,10 @@ public class CoinListPresenter extends BasePresenter<CoinListView> {
             if (datumListBuffer != null && !datumListBuffer.isEmpty()) {
                 datumListSaved.clear();
                 datumListSaved.addAll(datumListBuffer);
-                onLoadingFinish(false, false);
-                onLoadingSuccess(false, datumListSaved);
+                onLoadingFinish(mIsPageLoading, mIsRefreshing);
+                onLoadingSuccess(mIsPageLoading, datumListSaved);
             } else {
+                onLoadingFinish(mIsPageLoading, mIsRefreshing);
                 getViewState().showEmptyCoinList();
             }
         }

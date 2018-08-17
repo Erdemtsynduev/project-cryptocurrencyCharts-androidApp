@@ -9,6 +9,18 @@ import java.util.List;
 
 public interface PortfolioView extends MvpView {
 
+    void onStartLoading();
+
+    void onFinishLoading();
+
+    void showRefreshing();
+
+    void hideRefreshing();
+
+    void showListProgress();
+
+    void hideListProgress();
+
     void showPortfolioList(List<Datum> datumList);
 
     void showEmptyPortfolioList();
