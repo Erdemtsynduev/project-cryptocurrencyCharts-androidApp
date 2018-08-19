@@ -1,12 +1,6 @@
 package com.erdemtsynduev.profitcoin.screen.coindetail;
 
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,19 +8,14 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.erdemtsynduev.profitcoin.R;
-import com.erdemtsynduev.profitcoin.db.provider.CoinContentProvider;
-import com.erdemtsynduev.profitcoin.db.tables.FavoriteTable;
-import com.erdemtsynduev.profitcoin.network.model.favoritecoin.FavoriteCoin;
 import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Datum;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.erdemtsynduev.profitcoin.screen.coindetail.CoinDetailPresenter.KEY_DATUM_LOADER;
 import static com.erdemtsynduev.profitcoin.screen.coinlist.CoinListFragment.INTENT_DATUM;
 
-public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDetailView,
-        LoaderManager.LoaderCallbacks<Cursor> {
+public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDetailView {
 
     @InjectPresenter
     CoinDetailPresenter mCoinDetailPresenter;
@@ -41,9 +30,6 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
     TextView toolbarAction1;
     @BindView(R.id.toolbarAction2)
     TextView toolbarAction2;
-
-    private static final int LOADER_ID = 0x02;
-    private static final String IS_FAVORITE = "IS_FAVORITE";
 
     @ProvidePresenter
     CoinDetailPresenter provideCoinDetailPresenter() {
@@ -63,21 +49,6 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
 
         toolbarAction1.setText(getText(R.string.back));
         toolbarAction1.setOnClickListener(v -> mCoinDetailPresenter.onClickButtonBack());
-
-        if (savedInstanceState != null) {
-            mCoinDetailPresenter.setFavoriteCoin(savedInstanceState.getBoolean(IS_FAVORITE));
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(IS_FAVORITE, mCoinDetailPresenter.isFavoriteCoin());
-    }
-
-    @Override
-    public void getFavoriteDataFromDb(Bundle bundle) {
-        getSupportLoaderManager().initLoader(LOADER_ID, bundle, this);
     }
 
     @Override
@@ -116,37 +87,5 @@ public class CoinDetailActivity extends MvpAppCompatActivity implements CoinDeta
                 mCoinDetailPresenter.saveFavoriteCoinInDb();
             }
         });
-    }
-
-    @NonNull
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, Uri.parse(CoinContentProvider.URI_FAVORITE_TABLE + "/" + args.getString(KEY_DATUM_LOADER)),
-                null, null, null, null);
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        FavoriteCoin savedFavoriteCoin = null;
-        if (data != null && data.getCount() != 0) {
-            while (data.moveToNext()) {
-                FavoriteCoin favoriteCoin = new FavoriteCoin();
-                favoriteCoin.setId(data.getString(data.getColumnIndex(FavoriteTable.COLUMN_ID_FAVORITE)));
-                favoriteCoin.setName(data.getString(data.getColumnIndex(FavoriteTable.COLUMN_NAME_FAVORITE)));
-                savedFavoriteCoin = favoriteCoin;
-            }
-            data.close();
-        }
-
-        if (savedFavoriteCoin != null) {
-            mCoinDetailPresenter.setFavoriteCoin(true);
-        } else {
-            mCoinDetailPresenter.setFavoriteCoin(false);
-        }
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
     }
 }

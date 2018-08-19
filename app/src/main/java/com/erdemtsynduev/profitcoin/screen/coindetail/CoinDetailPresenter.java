@@ -1,7 +1,7 @@
 package com.erdemtsynduev.profitcoin.screen.coindetail;
 
+import android.database.Cursor;
 import android.net.Uri;
-import android.os.Bundle;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -43,8 +43,34 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
             getViewState().showErrorAddFavorite();
         }
 
-        updateLikes();
-        getFavoriteDataFromDb();
+        loadCoinListFavorite();
+    }
+
+    public void loadCoinListFavorite() {
+        loadData();
+    }
+
+    private void loadData() {
+        Cursor cursorData = ExtendApplication.getAppComponent().getContext().getContentResolver()
+                .query(CoinContentProvider.URI_FAVORITE_TABLE, null,
+                        null, null, null);
+
+        FavoriteCoin savedFavoriteCoin = null;
+        if (cursorData != null && cursorData.getCount() != 0) {
+            while (cursorData.moveToNext()) {
+                FavoriteCoin favoriteCoin = new FavoriteCoin();
+                favoriteCoin.setId(cursorData.getString(cursorData.getColumnIndex(FavoriteTable.COLUMN_ID_FAVORITE)));
+                favoriteCoin.setName(cursorData.getString(cursorData.getColumnIndex(FavoriteTable.COLUMN_NAME_FAVORITE)));
+                savedFavoriteCoin = favoriteCoin;
+            }
+            cursorData.close();
+        }
+
+        if (savedFavoriteCoin != null) {
+            setFavoriteCoin(true);
+        } else {
+            setFavoriteCoin(false);
+        }
     }
 
     public void updateLikes() {
@@ -53,15 +79,6 @@ public class CoinDetailPresenter extends MvpPresenter<CoinDetailView> {
         } else {
             getViewState().showDeleteFavoriteSuccess();
         }
-    }
-
-    public void getFavoriteDataFromDb() {
-        if (mDatum == null) {
-            return;
-        }
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_DATUM_LOADER, mDatum.getId());
-        getViewState().getFavoriteDataFromDb(bundle);
     }
 
     public boolean isFavoriteCoin() {
