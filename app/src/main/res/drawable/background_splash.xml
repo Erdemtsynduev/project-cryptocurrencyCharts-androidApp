@@ -6,7 +6,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_btc" />
+            android:src="@drawable/ic_logo_profitcoin" />
     </item>
 
 </layer-list>
