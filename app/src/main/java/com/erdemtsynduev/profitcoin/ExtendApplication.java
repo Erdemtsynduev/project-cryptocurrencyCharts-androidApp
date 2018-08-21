@@ -7,15 +7,12 @@ import android.support.annotation.VisibleForTesting;
 import com.erdemtsynduev.profitcoin.di.AppComponent;
 import com.erdemtsynduev.profitcoin.di.DaggerAppComponent;
 import com.erdemtsynduev.profitcoin.di.Modules.ContextModule;
-import com.google.firebase.auth.FirebaseAuth;
 
 import io.paperdb.Paper;
 
 public class ExtendApplication extends Application {
 
     private static AppComponent sAppComponent;
-    private static boolean appIsFirstRun = false;
-    private static FirebaseAuth mAuth;
     private static String apiKey = BuildConfig.API_KEY;
 
     @Override
@@ -32,21 +29,6 @@ public class ExtendApplication extends Application {
 
     public static AppComponent getAppComponent() {
         return sAppComponent;
-    }
-
-    public static boolean getIsFirstRun() {
-        return appIsFirstRun;
-    }
-
-    public static void setIsFirstRun(boolean isFirstRun) {
-        appIsFirstRun = isFirstRun;
-    }
-
-    public static FirebaseAuth getFirebaseAuth() {
-        if (mAuth == null) {
-            mAuth = FirebaseAuth.getInstance();
-        }
-        return mAuth;
     }
 
     public static void setApiKey(String apiKeyNew) {

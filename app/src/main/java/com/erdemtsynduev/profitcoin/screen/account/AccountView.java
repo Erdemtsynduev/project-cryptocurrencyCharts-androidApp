@@ -10,16 +10,6 @@ public interface AccountView extends MvpView {
 
     void hideAddApiDialog();
 
-    void showEmptyLogIn();
-
-    void showLogIn();
-
-    @StateStrategyType(OneExecutionStateStrategy.class)
-    void openScreenLogin();
-
-    @StateStrategyType(OneExecutionStateStrategy.class)
-    void openScreenSignup();
-
     @StateStrategyType(OneExecutionStateStrategy.class)
     void openScreenHelp();
 

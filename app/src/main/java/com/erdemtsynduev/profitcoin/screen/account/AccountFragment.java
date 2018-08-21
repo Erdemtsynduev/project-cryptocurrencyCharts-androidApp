@@ -17,8 +17,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.erdemtsynduev.profitcoin.R;
 import com.erdemtsynduev.profitcoin.screen.about.AboutActivity;
 import com.erdemtsynduev.profitcoin.screen.help.HelpActivity;
-import com.erdemtsynduev.profitcoin.screen.login.LoginActivity;
-import com.erdemtsynduev.profitcoin.screen.signup.SignupActivity;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
@@ -34,14 +32,8 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
     LinearLayout mLinearLayoutAbout;
     @BindView(R.id.frame_help)
     LinearLayout mLinearLayoutHelp;
-    @BindView(R.id.frame_login)
-    LinearLayout mLinearLayoutLogin;
-    @BindView(R.id.frame_signup)
-    LinearLayout mLinearLayoutSignUp;
     @BindView(R.id.frame_add_api_key)
     LinearLayout mLinearLayoutAddApiKey;
-    @BindView(R.id.frame_exit)
-    LinearLayout mLinearLayoutExit;
 
     private DialogPlus dialogPlus;
 
@@ -64,22 +56,7 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
 
         mLinearLayoutAbout.setOnClickListener(v -> mAccountPresenter.openScreenAboutApp());
         mLinearLayoutHelp.setOnClickListener(v -> mAccountPresenter.openScreenHelp());
-        mLinearLayoutLogin.setOnClickListener(v -> mAccountPresenter.openScreenLogin());
-        mLinearLayoutSignUp.setOnClickListener(v -> mAccountPresenter.openScreenSignup());
         mLinearLayoutAddApiKey.setOnClickListener(v -> mAccountPresenter.onAddApiDialogOpen());
-        mLinearLayoutExit.setOnClickListener(v -> mAccountPresenter.exitAccount());
-    }
-
-    @Override
-    public void openScreenLogin() {
-        Intent intent = new Intent(getContext(), LoginActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void openScreenSignup() {
-        Intent intent = new Intent(getContext(), SignupActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -122,19 +99,5 @@ public class AccountFragment extends MvpAppCompatFragment implements AccountView
         if (dialogPlus != null && dialogPlus.isShowing()) {
             dialogPlus.dismiss();
         }
-    }
-
-    @Override
-    public void showEmptyLogIn() {
-        mLinearLayoutLogin.setVisibility(View.VISIBLE);
-        mLinearLayoutSignUp.setVisibility(View.VISIBLE);
-        mLinearLayoutExit.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showLogIn() {
-        mLinearLayoutLogin.setVisibility(View.GONE);
-        mLinearLayoutSignUp.setVisibility(View.GONE);
-        mLinearLayoutExit.setVisibility(View.VISIBLE);
     }
 }

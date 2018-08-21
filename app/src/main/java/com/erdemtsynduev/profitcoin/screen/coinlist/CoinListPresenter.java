@@ -3,6 +3,7 @@ package com.erdemtsynduev.profitcoin.screen.coinlist;
 import android.database.Cursor;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.erdemtsynduev.profitcoin.ExtendApplication;
 import com.erdemtsynduev.profitcoin.db.provider.CoinContentProvider;
 import com.erdemtsynduev.profitcoin.db.tables.CoinTable;
@@ -16,7 +17,6 @@ import com.erdemtsynduev.profitcoin.network.model.listallcryptocurrency.Quote;
 import com.erdemtsynduev.profitcoin.network.model.request.NetworkRequest;
 import com.erdemtsynduev.profitcoin.network.model.request.Request;
 import com.erdemtsynduev.profitcoin.network.model.request.RequestStatus;
-import com.erdemtsynduev.profitcoin.screen.BasePresenter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,7 +33,7 @@ import io.paperdb.Paper;
 import static com.erdemtsynduev.profitcoin.network.NetworkService.TABLE_NAME;
 
 @InjectViewState
-public class CoinListPresenter extends BasePresenter<CoinListView> {
+public class CoinListPresenter extends MvpPresenter<CoinListView> {
 
     @Inject
     CoinMarketCapService mCoinMarketCapService;
