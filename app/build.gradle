@@ -1,6 +1,6 @@
 def versionMajor = 0
 def versionMinor = 6
-def versionPatch = 8
+def versionPatch = 9
 def versionBuild = 0
 
 apply plugin: 'com.android.application'
@@ -71,7 +71,6 @@ dependencies {
     annotationProcessor deps.room.compiler
 
     implementation deps.firebase.core
-    implementation deps.firebase.auth
 
     implementation deps.retrofit.core
     implementation deps.retrofit.gson
