@@ -72,7 +72,7 @@ public class NetworkService extends IntentService {
             }
             getContentResolver().bulkInsert(CoinContentProvider.URI_COIN_TABLE, contentValues);
             request.setStatus(RequestStatus.SUCCESS);
-        } catch (IOException e) {
+        } catch (Exception e) {
             request.setStatus(RequestStatus.ERROR);
             request.setError(e.getMessage());
         } finally {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.erdemtsynduev.profitcoin.screen.apikey.ApiKeyActivity;
 import com.erdemtsynduev.profitcoin.screen.home.HomeActivity;
 
 public class SplashActivity extends MvpAppCompatActivity implements SplashView {
@@ -24,9 +25,9 @@ public class SplashActivity extends MvpAppCompatActivity implements SplashView {
     public void setAuthorized(boolean isAuthorized) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
-            startActivity(new Intent(this, HomeActivity.class), bundle);
+            startActivity(new Intent(this, isAuthorized ? HomeActivity.class : ApiKeyActivity.class), bundle);
         } else {
-            startActivity(new Intent(this, HomeActivity.class));
+            startActivity(new Intent(this, isAuthorized ? HomeActivity.class : ApiKeyActivity.class));
         }
     }
 }

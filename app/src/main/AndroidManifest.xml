@@ -28,6 +28,7 @@
         <activity android:name=".screen.about.AboutActivity" />
         <activity android:name=".screen.help.HelpActivity" />
         <activity android:name=".screen.search.SearchCoinActivity" />
+        <activity android:name=".screen.apikey.ApiKeyActivity" />
 
         <service android:name=".network.NetworkService" />
 

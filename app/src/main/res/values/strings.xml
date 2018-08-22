@@ -55,6 +55,14 @@
         The majority of altcoins are forks of Bitcoin with small uninteresting changes.
         This page categorises different ways altcoins have modified Bitcoin.</string>
 
+    <string name="activity_api_key_hint_edit_text">Please add api key</string>
+    <string name="activity_api_key_text_button_api_key_save">Save</string>
+    <string name="activity_api_key_error_text_input_api">Error input api key</string>
+    <string name="activity_api_key_text_title">Important information!</string>
+    <string name="activity_api_key_info_add_api_key">The app fetches cryptocurrency information using Coin Market Cap API.
+        To start the application, you must add the API key. If you don’t already have an account,
+        you will need to create one in order to request an API Key.</string>
+
     <string name="empty_no_data">There is no data, Click Retry</string>
 
     <string name="ic_info">Icon info</string>
