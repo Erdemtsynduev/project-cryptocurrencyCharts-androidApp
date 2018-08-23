@@ -19,7 +19,6 @@ import com.erdemtsynduev.profitcoin.network.model.request.RequestStatus;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
