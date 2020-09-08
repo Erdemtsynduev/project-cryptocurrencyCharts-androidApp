@@ -23,7 +23,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_ENDPOINT", '"https://pro-api.coinmarketcap.com/"'
-        buildConfigField "String", "API_KEY", '"ADD YOUR API KEY"'
+        buildConfigField "String", "API_KEY", '"97b8ef41-3c54-4c22-98ee-16c807029099"'
     }
 
     signingConfigs {
