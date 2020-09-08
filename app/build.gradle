@@ -1,10 +1,9 @@
-def versionMajor = 0
-def versionMinor = 6
-def versionPatch = 9
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 4
 def versionBuild = 0
 
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
@@ -24,7 +23,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_ENDPOINT", '"https://pro-api.coinmarketcap.com/"'
-        buildConfigField "String", "API_KEY", '"ADD YOUR API KEY"'
+        buildConfigField "String", "API_KEY", '"97b8ef41-3c54-4c22-98ee-16c807029099"'
     }
 
     signingConfigs {
@@ -71,9 +70,6 @@ dependencies {
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
 
-    implementation deps.firebase.core
-    implementation deps.crashlytics
-
     implementation deps.retrofit.core
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava2adapter
@@ -101,5 +97,3 @@ dependencies {
         exclude group: 'com.google.code.findbugs'
     }
 }
-
-apply plugin: 'com.google.gms.google-services'
