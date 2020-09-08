@@ -4,7 +4,6 @@ def versionPatch = 9
 def versionBuild = 0
 
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
@@ -71,9 +70,6 @@ dependencies {
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
 
-    implementation deps.firebase.core
-    implementation deps.crashlytics
-
     implementation deps.retrofit.core
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava2adapter
@@ -101,5 +97,3 @@ dependencies {
         exclude group: 'com.google.code.findbugs'
     }
 }
-
-apply plugin: 'com.google.gms.google-services'
