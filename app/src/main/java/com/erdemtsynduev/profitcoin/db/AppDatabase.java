@@ -13,7 +13,7 @@ import com.erdemtsynduev.profitcoin.db.tables.FavoriteTableDao;
 /**
  * The Room database.
  */
-@Database(entities = {CoinTable.class, FavoriteTable.class}, version = 3)
+@Database(entities = {CoinTable.class, FavoriteTable.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**
